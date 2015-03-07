@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="org.zy.yuancheng.weibo"
+  version="0.0.1">
+
+  <name>YCWeibo</name>
+  <description>Cordova YCWeibo Plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,weibo</keywords>
+  <repo>https://github.com/iVanPan/cordova_weibo.git</repo>
+  <issue>https://github.com/iVanPan/cordova_weibo/issues</issue>
+  
+  <preference name="WEIBO_APP_ID" />
+  <engines>
+    <!-- Requires > 3.3.* because of the custom Framework tag for iOS [CB-5238] -->
+    <!-- Requires > 3.5.0 because of the custom Framework tag for Android [CB-6698] -->
+    <engine name="cordova" version=">=3.5.0" />
+  </engines>
+
+  <js-module src="www/ycweibo.js" name="ycweibo">
+    <clobbers target="YCWeibo" />
+  </js-module>
+  
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="YCWeibo">
+       <param name="ios-package" value="YCWeibo"/>
+     </feature>
+     <access origin="https://open.weibo.cn/*" />
+     <access origin="https://*.sina.cn/*" />
+     <access origin="https://login.sina.com.cn/*" />
+   </config-file>
+
+   <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>$PACKAGE_NAME</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>wb$WEIBO_APP_ID</string>
+        </array>
+      </dict>
+    </array>
+  </config-file>
+
+
+
+  <header-file src="src/ios/YCWeibo.h"/>
+  <source-file src="src/ios/YCWeibo.m"/>
+  <header-file src="src/ios/AppDelegate+YCWeibo.h"/>
+  <source-file src="src/ios/AppDelegate+YCWeibo.m"/>
+
+  <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
+  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
+  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboToken.h" />
+  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboUser.h" />
+  <header-file src="src/ios/libWeiboSDK/WBSDKBasicButton.h" />
+  <header-file src="src/ios/libWeiboSDK/WBSDKCommentButton.h" />
+  <header-file src="src/ios/libWeiboSDK/WBSDKRelationshipButton.h" />
+  <header-file src="src/ios/libWeiboSDK/WeiboSDK.h" />
+  <header-file src="src/ios/libWeiboSDK/WeiboUser.h" />
+  <source-file src="src/ios/libWeiboSDK/libWeiboSDK.a" framework="true"  compiler-flags="-objc"/>
+  <resource-file src="src/ios/libWeiboSDK/WeiboSDK.bundle" />
+
+  <!-- Other required frameworks -->
+  <framework src="QuartzCore.framework" />
+  <framework src="ImageIO.framework" />
+  <framework src="SystemConfiguration.framework" />
+  <framework src="Security.framework" />
+
+</platform>
+
+<platform name="android">
+  <config-file target="res/xml/config.xml" parent="/*">
+    <feature name="YCWeibo" >
+      <param name="android-package" value="org.zy.yuancheng.weibo.YCWeibo"/>
+    </feature>
+    <access origin="https://open.weibo.cn/*" />
+    <access origin="https://login.sina.com.cn/*" />
+  </config-file>
+  <!-- android -->
+  <config-file target="AndroidManifest.xml" parent="/manifest">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />    
+  </config-file>
+
+  <config-file target="AndroidManifest.xml" parent="/manifest/application">
+    <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" 
+      android:configChanges="keyboardHidden|orientation"
+      android:windowSoftInputMode="adjustResize"
+      android:exported="false" 
+      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">>
+    </activity>
+  </config-file>
+
+  <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
+  <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
+  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
+  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/mips/" />
+  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/x86/" />
+  <source-file src="src/android/libs/weibosdkcore_v3.0.1.jar" target-dir="libs/" />
+</platform>
+
+</plugin>

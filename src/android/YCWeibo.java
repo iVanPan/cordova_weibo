@@ -60,7 +60,6 @@ public class YCWeibo extends CordovaPlugin {
 							if(mSsoHandler!=null){
 								Log.d("sso 登陆", "开始使用客户端登陆");
 								mSsoHandler.authorize(new AuthListener(YCWeibo.this));
-								//mSsoHandler.authorizeWeb(new AuthListener());
 							}
 							};
 					};

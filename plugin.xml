@@ -33,6 +33,7 @@
      <access origin="https://open.weibo.cn/*" />
      <access origin="https://*.sina.cn/*" />
      <access origin="https://login.sina.com.cn/*" />
+     <access origin="https://passport.weibo.cn/*"/>
    </config-file>
      <!--set ios URLTypes for Weibo -->
    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
@@ -82,6 +83,7 @@
     </feature>
     <access origin="https://open.weibo.cn/*" />
     <access origin="https://login.sina.com.cn/*" />
+    <access origin="https://passport.weibo.cn/*"/>
   </config-file>
    <!-- android  uses-permission for weibo sdk-->
   <config-file target="AndroidManifest.xml" parent="/manifest">

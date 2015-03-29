@@ -1,6 +1,6 @@
 //
 //  AppDelegate＋YCWeibo.m
-//  HelloWorld
+//  
 //
 //  Created by Van on 15/3/3.
 //
@@ -56,15 +56,11 @@ void swizzleMethod(Class c, SEL originalSelector)
 
 - (BOOL)swizzled_application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    NSLog(@" this is a test");
-    BOOL ret = [self swizzled_application:application didFinishLaunchingWithOptions:launchOptions];
-    
+    BOOL ret = [self swizzled_application:application didFinishLaunchingWithOptions:launchOptions];    
     if (ret)
     {
         NSString *appId = [self.viewController.settings objectForKey:@"weibo_app_id"];
-        NSLog(@"微博 appid is  %@",appId);
         NSString *redirectURI = [self.viewController.settings objectForKey:@"redirecturi"];
-        NSLog(@"微博 redirectURI is  %@",redirectURI);
         if (appId)
         {
             YCWeibo *weibo = [self.viewController getCommandInstance:@"YCWeibo"];
@@ -80,7 +76,6 @@ void swizzleMethod(Class c, SEL originalSelector)
 
 - (BOOL)noop_application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    NSLog(@"测试");
     return YES;
 }
 @end

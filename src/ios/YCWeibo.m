@@ -31,7 +31,6 @@
     [saveDefaults removeObjectForKey:@"userid"];
     [saveDefaults removeObjectForKey:@"access_token"];
     [saveDefaults synchronize];
-    NSLog(@"保存的token 是 %@",token);
     if(token){
         [WeiboSDK logOutWithToken:token delegate:self.appDelegate withTag:nil];
     }
@@ -43,7 +42,6 @@
 {
     self.weiboAppId = weiboAppId;
     [WeiboSDK registerApp:weiboAppId];
-    NSLog(@"Register weibo app: %@", weiboAppId);
 }
 
 -(void)saveredirectURI:(NSString *)redirectURI
@@ -51,7 +49,6 @@
     NSUserDefaults *saveDefaults=[NSUserDefaults standardUserDefaults];
     [saveDefaults setValue:redirectURI forKey:@"redirectURI"];
     [saveDefaults synchronize];
-    NSLog(@"Save weibo redirectURI: %@", redirectURI);
 }
 
 - (void)handleOpenURL:(NSNotification *)notification
@@ -71,7 +68,6 @@
     }
     else if ([response isKindOfClass:WBAuthorizeResponse.class])
     {
-        NSLog(@"授权回调");
         NSMutableDictionary *Dic =[NSMutableDictionary dictionaryWithCapacity:2];
         [Dic setObject:[(WBAuthorizeResponse *)response userID] forKey:@"userid"];
         [Dic setObject:[(WBAuthorizeResponse *)response accessToken] forKey:@"access_token"];
@@ -79,9 +75,6 @@
         [saveDefaults setValue:[(WBAuthorizeResponse *)response userID] forKey:@"userid"];
         [saveDefaults setValue:[(WBAuthorizeResponse *)response accessToken] forKey:@"access_token"];
         [saveDefaults synchronize];
-        NSLog(@"开始保存 dic is %@",Dic);
-        
-
         CDVPluginResult *pluginResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];
     }

@@ -28,6 +28,8 @@ YCWeibo.logout(function(){
 ```
 
 
+#Notice      
+When two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)
 
 ###About Get User Info
 after weibo sso Login,you can get access_token and userid,using get method to get user info directly with url https://api.weibo.com/2/users/show.json?uid=xxxx&access_token=xxxx

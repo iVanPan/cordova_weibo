@@ -6,9 +6,9 @@
 @interface YCWeibo : CDVPlugin<WeiboSDKDelegate>{}
 
 @property (strong, retain) NSString* callback;
-@property (nonatomic, strong) NSString *weiboAppId;
+@property (nonatomic, copy) NSString *redirectURI;
+@property (nonatomic, copy) NSString *weiboAppId;
 -(void)ssoLogin:(CDVInvokedUrlCommand*)command;
 -(void)logout:(CDVInvokedUrlCommand*)command;
--(void)registerApp:(NSString *)weiboAppId;
--(void)saveredirectURI:(NSString *)redirectURI;
+-(void)shareToWeibo:(CDVInvokedUrlCommand *)command;
 @end

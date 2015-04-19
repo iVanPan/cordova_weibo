@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="org.zy.yuancheng.weibo"
-  version="0.0.1">
+  version="0.2.1">
 
   <name>YCWeibo</name>
   <description>Cordova YCWeibo Plugin</description>
@@ -34,6 +34,7 @@
      <access origin="https://*.sina.cn/*" />
      <access origin="https://login.sina.com.cn/*" />
      <access origin="https://passport.weibo.cn/*"/>
+     <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
      <!--set ios URLTypes for Weibo -->
    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
@@ -53,8 +54,7 @@
 
   <header-file src="src/ios/YCWeibo.h"/>
   <source-file src="src/ios/YCWeibo.m"/>
-  <header-file src="src/ios/AppDelegate+YCWeibo.h"/>
-  <source-file src="src/ios/AppDelegate+YCWeibo.m"/>
+
   <!-- Weibo sdk version 3.0.1 https://github.com/sinaweibosdk/weibo_ios_sdk -->
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
@@ -84,6 +84,7 @@
     <access origin="https://open.weibo.cn/*" />
     <access origin="https://login.sina.com.cn/*" />
     <access origin="https://passport.weibo.cn/*"/>
+     <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
   </config-file>
    <!-- android  uses-permission for weibo sdk-->
   <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -99,11 +100,22 @@
       android:configChanges="keyboardHidden|orientation"
       android:windowSoftInputMode="adjustResize"
       android:exported="false" 
-      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">>
+      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
     </activity>
+    <!--android mianfest for weibo share callback -->
+    <activity
+      android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" >
+      <intent-filter>
+        <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+        <category android:name="android.intent.category.DEFAULT" />
+       </intent-filter>
+     </activity>
   </config-file>
 
   <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
+  <source-file src="src/android/YCWeiboShareCallback.java" target-dir="src/org/zy/yuancheng/weibo" />
   <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
   <!-- android weibo sdk version 3.0.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
   <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />

@@ -8,6 +8,10 @@ Weibo SSO Login, Weibo Logout,Weibo WebPage Share
 3. cordova build 
 4.  If you are using this plugin for iOS,check the URLTypes in your Xcode project.If you don't  find URLTypes for weibosdk，manually add it.    					
 
+#important
+1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
+2.  This plugin should be used after the deviceready event has been fired!!!!!!!  				
+
 #ISSUES				
 1.For android,if you are sharing webpage without weibo app client,you may get error like this {"error":"userinfo error","pos":"5"}				
 2.	For iOS,if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.	

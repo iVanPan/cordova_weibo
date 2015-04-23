@@ -3,11 +3,11 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="org.zy.yuancheng.weibo"
-  version="0.2.1">
+  version="0.3.2">
 
   <name>YCWeibo</name>
   <description>Cordova YCWeibo Plugin</description>
-  <license>Apache 2.0</license>
+  <license>MIT</license>
   <keywords>cordova,weibo</keywords>
   <repo>https://github.com/iVanPan/cordova_weibo.git</repo>
   <issue>https://github.com/iVanPan/cordova_weibo/issues</issue>
@@ -74,7 +74,9 @@
   <framework src="ImageIO.framework" />
   <framework src="SystemConfiguration.framework" />
   <framework src="Security.framework" />
-
+    <info>
+      安装完插件，请用XCode打开工程，查看URL Types里面weibo的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
+    </info>
 </platform>
   <!-- android -->
 <platform name="android">

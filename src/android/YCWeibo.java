@@ -56,8 +56,8 @@ public class YCWeibo extends CordovaPlugin {
 	protected void pluginInitialize() {
 		// TODO Auto-generated method stub
 		super.pluginInitialize();
-		APP_KEY = webView.getProperty(WEBIO_APP_ID, "");
-		REDIRECT_URL = webView.getProperty(WEBIO_REDIRECT_URL, DEFUALT_URL);
+		APP_KEY = webView.getPreferences().getString(WEBIO_APP_ID, "");
+		REDIRECT_URL = webView.getPreferences().getString(WEBIO_REDIRECT_URL, DEFUALT_URL);
 	}
 
 	@Override

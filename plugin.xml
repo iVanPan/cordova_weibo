@@ -35,6 +35,7 @@
      <access origin="https://*.sina.cn/*" />
      <access origin="https://login.sina.com.cn/*" />
      <access origin="https://passport.weibo.cn/*"/>
+     <access origin="http://service.weibo.com/share/*"/>
      <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
      <!--set ios URLTypes for Weibo -->

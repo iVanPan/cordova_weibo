@@ -123,8 +123,9 @@
   <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
   <!-- android weibo sdk version 3.0.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
   <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
-  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/mips/" />
-  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/x86/" />
+  <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
+  <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
+  <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
   <source-file src="src/android/libs/weibosdkcore_v3.0.1.jar" target-dir="libs/" />
 </platform>
 

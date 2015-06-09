@@ -1,5 +1,6 @@
 # Cordova_Weibo_Plugin
-This is a Cordova Plugin for WeiboSDK(Both on android and iOS)     
+This is a Cordova Plugin for WeiboSDK(Both on android and iOS)   简体中文查看[这里](https://github.com/iVanPan/cordova_weibo/blob/master/README_ZH.md)  
+I also write a qq Cordova plugin [here](https://github.com/iVanPan/Cordova_QQ)
 # Feature
 Weibo SSO Login, Weibo Logout,Weibo WebPage Share
 # Install

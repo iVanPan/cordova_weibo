@@ -38,18 +38,19 @@ YCWeibo.logout(function(){
 ### Weibo Webpage Share
 ```Javascript
 var args = {};
-    args.url = "http://www.baidu.com";
-    args.title = "Baidu";
-    args.description = "This is Baidu";
-    args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//if you don't have imageUrl,for android http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png will be the defualt one
-    args.defaultText = "";
-    YCWeibo.shareToWeibo(function () {
-      alert("share success");
-    }, function (failReason) {
-      alert(failReason);
-    }, args);
+args.url = "http://www.baidu.com";
+args.title = "Baidu";
+args.description = "This is Baidu";
+args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//if you don't have imageUrl,for android http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png will be the defualt one
+args.defaultText = "";
+YCWeibo.shareToWeibo(function () {
+    alert("share success");
+ }, function (failReason) {
+    alert(failReason);
+ }, args);
 ```
-
+#About WeiboSdk
+you can downlaod last weibosdk [here](https://github.com/sinaweibosdk) .if you find any problem about weibosdk, open an isssus please.
 #Notice      
 When two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007)
 

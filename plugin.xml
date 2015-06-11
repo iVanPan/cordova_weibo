@@ -38,7 +38,7 @@
      <access origin="http://service.weibo.com/share/*"/>
      <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
-     <!--set ios URLTypes for Weibo -->
+   <!--set ios URLTypes for Weibo -->
    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
     <array>
       <dict>
@@ -75,11 +75,11 @@
   <framework src="ImageIO.framework" />
   <framework src="SystemConfiguration.framework" />
   <framework src="Security.framework" />
-    <info>
-      安装完插件，请用XCode打开工程，查看URL Types里面weibo的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
-    </info>
+  <info>
+    安装完插件，请用XCode打开工程，查看URL Types里面weibo的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
+  </info>
 </platform>
-  <!-- android -->
+<!-- android -->
 <platform name="android">
   <config-file target="res/xml/config.xml" parent="/*">
     <feature name="YCWeibo" >
@@ -88,9 +88,9 @@
     <access origin="https://open.weibo.cn/*" />
     <access origin="https://login.sina.com.cn/*" />
     <access origin="https://passport.weibo.cn/*"/>
-     <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
+    <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
   </config-file>
-   <!-- android  uses-permission for weibo sdk-->
+  <!-- android  uses-permission for weibo sdk-->
   <config-file target="AndroidManifest.xml" parent="/manifest">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -98,35 +98,55 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />    
   </config-file>
-  <!--android mianfest for weibo web authorization -->
+
   <config-file target="AndroidManifest.xml" parent="/manifest/application">
+    <!--android mianfest for weibo web authorization -->
     <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" 
       android:configChanges="keyboardHidden|orientation"
       android:windowSoftInputMode="adjustResize"
       android:exported="false" 
       android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
     </activity>
+    <!--android mianfest for weibo mobile Register -->
+    <activity android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity" 
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="adjustResize"
+      android:exported="false" >
+    </activity>
+    <!--android mianfest for weibo select Country -->
+    <activity android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity" 
+      android:configChanges="keyboardHidden|orientation"
+      android:windowSoftInputMode="adjustResize"
+      android:exported="false" >
+    </activity>
     <!--android mianfest for weibo share callback -->
     <activity
-      android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
-      android:configChanges="keyboardHidden|orientation"
-      android:screenOrientation="portrait" >
-      <intent-filter>
-        <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-        <category android:name="android.intent.category.DEFAULT" />
-       </intent-filter>
-     </activity>
-  </config-file>
+        android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
+        android:configChanges="keyboardHidden|orientation"
+        android:screenOrientation="portrait" >
+        <intent-filter>
+          <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+      </activity>
+          <!--android mianfest for weibo downloadService-->
+    <service android:name="com.sina.weibo.sdk.net.DownloadService"
+      android:exported="false"></service>
+    </config-file>
 
-  <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
-  <source-file src="src/android/YCWeiboShareCallback.java" target-dir="src/org/zy/yuancheng/weibo" />
-  <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
-  <!-- android weibo sdk version 3.0.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
-  <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
-  <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
-  <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
-  <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
-  <source-file src="src/android/libs/weibosdkcore_v3.0.1.jar" target-dir="libs/" />
-</platform>
+    <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
+    <source-file src="src/android/YCWeiboShareCallback.java" target-dir="src/org/zy/yuancheng/weibo" />
+    <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
+    <!-- android weibo sdk version 3.1.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
+    <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
+    <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
+    <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arme64-v8a/" />
+    <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
+    <source-file src="src/android/libs/mips64/libweibosdkcore.so" target-dir="libs/mips64/" />
+    <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
+    <source-file src="src/android/libs/x86_64/libweibosdkcore.so" target-dir="libs/x86_64/" />
+    <source-file src="src/android/libs/weibosdkcore_v3.1.1.jar" target-dir="libs/" />
+  </platform>
 
 </plugin>

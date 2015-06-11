@@ -13,9 +13,8 @@ Weibo SSO Login, Weibo Logout,Weibo WebPage Share
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 2.  This plugin should be used after the deviceready event has been fired!!!!!!!  				
 
-#ISSUES				
-1.For android,if you are sharing webpage without weibo app client,you may get error like this {"error":"userinfo error","pos":"5"}				
-2.	For iOS,if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.	
+#ISSUES						
+1.if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.	
 
 # Usage
 ### Weibo SSO Login

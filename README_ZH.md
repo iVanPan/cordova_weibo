@@ -1,6 +1,7 @@
 # Cordova_Weibo_Plugin
 这是一个微博的Cordova插件(设用于Android和iOS) .For English,Please check [here](https://github.com/iVanPan/cordova_weibo)    
-同时我还写了一个QQ的Cordova插件有兴趣的话可以查看[这里](https://github.com/iVanPan/Cordova_QQ)
+同时我还写了一个QQ的Cordova插件有兴趣的话可以查看[这里](https://github.com/iVanPan/Cordova_QQ)				
+这两个插件将进行长期的维护，如果有任何问题或是建议，请开issuss，也欢迎star或是fork。微博SDK部分如有涉及版权问题，版权归新浪微博所有
 # 功能
 微博SSO 登录，微博登出，微博网页分享
 # 安装
@@ -37,18 +38,19 @@ YCWeibo.logout(function(){
 ### 微博网页分享
 ```Javascript
 var args = {};
-    args.url = "http://www.baidu.com";
-    args.title = "Baidu";
-    args.description = "This is Baidu";
-    args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//if you don't have imageUrl,for android http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png will be the defualt one
-    args.defaultText = "";
-    YCWeibo.shareToWeibo(function () {
-      alert("share success");
-    }, function (failReason) {
-      alert(failReason);
-    }, args);
+args.url = "http://www.baidu.com";
+args.title = "Baidu";
+args.description = "This is Baidu";
+args.imageUrl = "https://www.baidu.com/img/bdlogo.png";//if you don't have imageUrl,for android http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png will be the defualt one
+args.defaultText = "";
+YCWeibo.shareToWeibo(function () {
+    alert("share success");
+ }, function (failReason) {
+   alert(failReason);
+}, args);
 ```
-
+#关于微博SDK
+你可以在[这里](https://github.com/sinaweibosdk)，找到最新的微博SDK，如果发现bug请开issus，同时也欢迎star 和 fork
 #注意事项     
 cordova目前有一个bug，如果你有多个插件要修改iOS工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的Xcode工程里面检查一下URLTypes。 关于这个bug的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到
 

@@ -5,7 +5,7 @@
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)	
 
 This is a Cordova Plugin for WeiboSDK. [简体中文](https://github.com/iVanPan/cordova_weibo/blob/master/README_ZH.md)  
-I also write a cordova plugin  for qq sdk[here](https://github.com/iVanPan/Cordova_QQ)
+I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cordova_QQ).
 ## Feature
 - Weibo SSO Login
 - Weibo Logout

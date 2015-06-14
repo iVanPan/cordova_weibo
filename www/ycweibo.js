@@ -29,6 +29,9 @@ module.exports = {
 			args.defaultText = "";
 		}
 		exec(successCallback, errorCallback, "YCWeibo", "shareToWeibo", [args]);
+	},
+	checkClientInstalled:function(successCallback, errorCallback){
+		exec(successCallback, errorCallback, "YCWeibo", "checkClientInstalled", []);
 	}
 
 };

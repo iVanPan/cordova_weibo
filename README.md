@@ -1,5 +1,5 @@
 # Cordova_Weibo_Plugin
-[![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
+[![version](https://img.shields.io/badge/version-0.3.3-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)	
@@ -10,6 +10,7 @@ I also write a cordova plugin  for qq sdk[here](https://github.com/iVanPan/Cordo
 - Weibo SSO Login
 - Weibo Logout
 - Weibo WebPage Share
+- Check Weibo Client is Installed
 
 ## Requirements
 - Cordova Version 3.5+ 
@@ -60,6 +61,14 @@ YCWeibo.shareToWeibo(function () {
  }, function (failReason) {
     alert(failReason);
  }, args);
+```
+### CheckClientInstalled
+```Javascript
+YCWeibo.checkClientInstalled(function(){
+	console.log('client is installed');
+},function(){
+	console.log('client is not installed');
+});
 ```
 ##About WeiboSdk
 you can downlaod last weibosdk [here](https://github.com/sinaweibosdk) .if you find any problem about weibosdk, open an isssus please.

@@ -1,5 +1,5 @@
-# Cordova_Weibo_Plugin
-[![version](https://img.shields.io/badge/version-0.3.2-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
+# Cordova 微博插件
+[![version](https://img.shields.io/badge/version-0.3.3-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)	
@@ -10,6 +10,7 @@
 - 微博SSO 登录
 - 微博登出
 - 微博网页分享
+- 检查微博官方客户端是否安装
 
 ##安装要求
 - Cordova Version >=3.5
@@ -57,8 +58,16 @@ args.defaultText = "";
 YCWeibo.shareToWeibo(function () {
     alert("share success");
  }, function (failReason) {
-   alert(failReason);
+    alert(failReason);
 }, args);
+```
+### 检查微博客户端是否安装了
+```Javascript
+YCWeibo.checkClientInstalled(function(){
+	console.log('client is installed');
+},function(){
+	console.log('client is not installed');
+});
 ```
 ##关于微博SDK
 你可以在[这里](https://github.com/sinaweibosdk)，找到最新的微博SDK，如果发现bug请开issus，同时也欢迎star 和 fork

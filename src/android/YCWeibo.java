@@ -1,8 +1,21 @@
 package org.zy.yuancheng.weibo;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+
+import com.sina.weibo.sdk.api.WebpageObject;
+import com.sina.weibo.sdk.api.WeiboMessage;
+import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
+import com.sina.weibo.sdk.api.share.SendMessageToWeiboRequest;
+import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.utils.Utility;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -11,24 +24,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.sina.weibo.sdk.api.WebpageObject;
-import com.sina.weibo.sdk.api.WeiboMessage;
-
-import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
-import com.sina.weibo.sdk.api.share.SendMessageToWeiboRequest;
-import com.sina.weibo.sdk.api.share.WeiboShareSDK;
-import com.sina.weibo.sdk.auth.AuthInfo;
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.auth.WeiboAuthListener;
-import com.sina.weibo.sdk.auth.sso.SsoHandler;
-
-import com.sina.weibo.sdk.exception.WeiboException;
-import com.sina.weibo.sdk.utils.Utility;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class YCWeibo extends CordovaPlugin {
 
@@ -43,6 +41,7 @@ public class YCWeibo extends CordovaPlugin {
 	public static final String WEIBO_EXCEPTION = "weibo exception";
 	public static final String ONLY_GET_CODE = "only get code";
 	public static final String ERROR_IMAGE_URL = "share image url is incorrect";
+	public static final String WEIBO_CLIENT_NOT_INSTALLEDL = "weibo client is not installed";
 	public static final String DEFAULT_WEBPAGE_ICON = "http://www.sinaimg.cn/blog/developer/wiki/LOGO_64x64.png";
 	public static CallbackContext currentCallbackContext;
 	public static String APP_KEY;
@@ -64,12 +63,14 @@ public class YCWeibo extends CordovaPlugin {
 	public boolean execute(String action, final JSONArray args,
 			final CallbackContext callbackContext) throws JSONException {
 		// TODO Auto-generated method stub
-		if (action.equals("ssoLogin")) {
+		if (action.equalsIgnoreCase("ssoLogin")) {
 			return ssoLogin(callbackContext);
-		} else if (action.equals("logout")) {
+		} else if (action.equalsIgnoreCase("logout")) {
 			return logout(callbackContext);
-		} else if (action.equals("shareToWeibo")) {
+		} else if (action.equalsIgnoreCase("shareToWeibo")) {
 			return shareToWeibo(callbackContext, args);
+		}else if(action.equalsIgnoreCase("checkClientInstalled")){
+			return checkClientInstalled(callbackContext);
 		}
 		return super.execute(action, args, callbackContext);
 	}
@@ -78,7 +79,7 @@ public class YCWeibo extends CordovaPlugin {
 	 * 组装JSON
 	 * 
 	 * @param access_token
-	 * @param uid
+	 * @param userid
 	 * @return
 	 */
 	private JSONObject makeJson(String access_token, String userid) {
@@ -127,6 +128,26 @@ public class YCWeibo extends CordovaPlugin {
 		return true;
 	}
 
+	/**
+	 *  检查微博客户端是否安装
+	 * @param callbackContext
+	 * @return
+	 */
+	private boolean checkClientInstalled(CallbackContext callbackContext){
+		AuthInfo mAuthInfo = new AuthInfo(YCWeibo.this.cordova.getActivity(),
+				APP_KEY, REDIRECT_URL, SCOPE);
+		if (mSsoHandler == null){
+			mSsoHandler = new SsoHandler(YCWeibo.this.cordova.getActivity(),
+					mAuthInfo);
+		}
+		Boolean installed = mSsoHandler.isWeiboAppInstalled();
+		if(installed){
+			callbackContext.success();
+		}else{
+			callbackContext.error(WEIBO_CLIENT_NOT_INSTALLEDL);
+		}
+		return true;
+	}
 	/**
 	 * 微博登出
 	 * 

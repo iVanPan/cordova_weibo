@@ -11,4 +11,5 @@
 -(void)ssoLogin:(CDVInvokedUrlCommand*)command;
 -(void)logout:(CDVInvokedUrlCommand*)command;
 -(void)shareToWeibo:(CDVInvokedUrlCommand *)command;
+-(void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
 @end

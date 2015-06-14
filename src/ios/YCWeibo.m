@@ -93,8 +93,17 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
             
         //}
 
+    }	
+}
+-(void)checkClientInstalled:(CDVInvokedUrlCommand *)command{
+    Boolean installed =[WeiboSDK isWeiboAppInstalled];
+    if(installed){
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }else{
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }
-	
 }
 - (void)handleOpenURL:(NSNotification *)notification
 {

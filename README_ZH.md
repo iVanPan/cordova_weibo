@@ -69,6 +69,10 @@ YCWeibo.checkClientInstalled(function(){
 	console.log('client is not installed');
 });
 ```
+#测试Demo
+在安装完这个插件以后，把 cordova 工程中的代码替换为 example_www中的代码，在build以后可以进行各个功能测试，以下为运行效果图：
+<div style="text-align:center"><img src="https://github.com/iVanPan/cordova_weibo/blob/master/ScreenShot.png?raw=true" alt="example" style="width:300px"></div>		
+
 ##关于微博SDK
 你可以在[这里](https://github.com/sinaweibosdk)，找到最新的微博SDK，如果发现bug请开issus，同时也欢迎star 和 fork
 

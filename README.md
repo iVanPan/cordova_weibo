@@ -25,7 +25,7 @@ I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cord
 ##Notes
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!				
-3. <del>If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).</del>Update:This Bug is fixed in last cordova version(5.1.1)				
+3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~Update:This Bug is fixed in last cordova version(5.1.1)				
 
 ##ISSUES						
 1.if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.	
@@ -70,6 +70,13 @@ YCWeibo.checkClientInstalled(function(){
 	console.log('client is not installed');
 });
 ```
+##Example			
+1. install this plugin
+2. backup www folder in your cordova project
+3. replace www by example_www
+4. cordova build & test	
+
+
 ##About WeiboSdk
 you can downlaod last weibosdk [here](https://github.com/sinaweibosdk) .if you find any problem about weibosdk, open an isssus please.
 

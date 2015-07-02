@@ -1,19 +1,19 @@
 package org.zy.yuancheng.weibo;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.sina.weibo.sdk.api.share.WeiboShareSDK;
 import com.sina.weibo.sdk.constant.WBConstants;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-
 public class YCWeiboShareCallback extends Activity implements IWeiboHandler.Response {
 
-	public static final String CANCEL_BY_USER ="cancel by user";
-	public static final String SHARE_FAIL ="sharefail";
+	private static final String CANCEL_BY_USER ="cancel by user";
+	private static final String SHARE_FAIL ="sharefail";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

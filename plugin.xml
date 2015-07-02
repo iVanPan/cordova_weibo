@@ -36,6 +36,9 @@
      <access origin="https://login.sina.com.cn/*" />
      <access origin="https://passport.weibo.cn/*"/>
      <access origin="http://service.weibo.com/share/*"/>
+     <access origin="http://*.sinajs.cn/*"/>
+     <access origin="http://*.sina.com.cn/*"/>
+     <access origin="https://api.weibo.com/*"/>
      <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
    <!--set ios URLTypes for Weibo -->
@@ -88,6 +91,8 @@
     <access origin="https://open.weibo.cn/*" />
     <access origin="https://login.sina.com.cn/*" />
     <access origin="https://passport.weibo.cn/*"/>
+    <access origin="http://*.sinaimg.cn/*"/>
+    <access origin="https://api.weibo.com/*"/>
     <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
   </config-file>
   <!-- android  uses-permission for weibo sdk-->
@@ -122,15 +127,15 @@
     </activity>
     <!--android mianfest for weibo share callback -->
     <activity
-        android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
-        android:configChanges="keyboardHidden|orientation"
-        android:screenOrientation="portrait" >
-        <intent-filter>
-          <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-          <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
-      </activity>
-          <!--android mianfest for weibo downloadService-->
+      android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
+      android:configChanges="keyboardHidden|orientation"
+      android:screenOrientation="portrait" >
+      <intent-filter>
+        <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <!--android mianfest for weibo downloadService-->
     <service android:name="com.sina.weibo.sdk.net.DownloadService"
       android:exported="false"></service>
     </config-file>

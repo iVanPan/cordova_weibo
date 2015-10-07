@@ -17,7 +17,7 @@
 - Cordova-Android >=4.0
 
 ## 安装
-1. 命令行运行 ```cordova plugin add https://github.com/iVanPan/cordova_weibo.git --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```
+1. 命令行运行 ```cordova plugin add https://github.com/iVanPan/cordova_weibo.git --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```   或是    ```cordova plugin add cordova-plugin-weibosdk --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```			
 2. 在你的config.xml文件中添加 ```<preference name="REDIRECTURI" value="YOUR_WEIBO_REDIRECTURI" />``` 如果你不添加这个选项，那么默认的 redirecturi 是 https://api.weibo.com/oauth2/default.html               
 3. 命令行运行cordova build   					
 
@@ -31,7 +31,7 @@
 
 ## 关于 iOS 9 适配					
 ###App Transport Security							
-在 iOS 9 中 Apple 默认要求使用HTTPS ，由于目前 QQ SDK 还不支持，安装完这个插件以后将不再默认使用HTTPS					
+在 iOS 9 中 Apple 默认要求使用HTTPS ，由于目前 Weibo SDK 还不支持，安装完这个插件以后将不再默认使用HTTPS					
 	
 
 ##使用方法

@@ -1,5 +1,5 @@
 # Cordova_Weibo_Plugin
-[![version](https://img.shields.io/badge/version-0.3.3-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
+[![version](https://img.shields.io/badge/version-0.3.4-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)	
@@ -26,6 +26,12 @@ I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cord
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!				
 3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~Update:This Bug is fixed in last cordova version(5.1.1)				
+
+## About iOS 9
+
+###App Transport Security                   
+iOS 9 introduces a new security feature that blocks non-HTTPS traffic in your app. However,   WeiBo SDK not support HTTPS yet, this Plugin will turn off https and allow non-HTTPS traffic         
+
 
 ##ISSUES						
 1.if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.	

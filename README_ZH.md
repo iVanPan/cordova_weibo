@@ -1,5 +1,5 @@
 # Cordova 微博插件
-[![version](https://img.shields.io/badge/version-0.3.3-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
+[![version](https://img.shields.io/badge/version-0.3.4-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)	
@@ -28,6 +28,11 @@
 
 ## 问题				
 1.在不使用客户端分享进行分享的时候，网页分享会变成文字分享			
+
+## 关于 iOS 9 适配					
+###App Transport Security							
+在 iOS 9 中 Apple 默认要求使用HTTPS ，由于目前 QQ SDK 还不支持，安装完这个插件以后将不再默认使用HTTPS					
+	
 
 ##使用方法
 ### 微博SSO登录

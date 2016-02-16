@@ -170,7 +170,7 @@
     <!-- android weibo sdk version 3.1.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
     <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
     <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
-    <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arme64-v8a/" />
+    <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/" />
     <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
     <source-file src="src/android/libs/mips64/libweibosdkcore.so" target-dir="libs/mips64/" />
     <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />

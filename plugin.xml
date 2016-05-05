@@ -87,6 +87,7 @@
   <header-file src="src/ios/libWeiboSDK/WBSDKCommentButton.h" />
   <header-file src="src/ios/libWeiboSDK/WBSDKRelationshipButton.h" />
   <header-file src="src/ios/libWeiboSDK/WeiboSDK.h" />
+  <header-file src="src/ios/libWeiboSDK/WeiboSDK+Statistics.h" />
   <header-file src="src/ios/libWeiboSDK/WeiboUser.h" />
   <source-file src="src/ios/libWeiboSDK/libWeiboSDK.a" framework="true"  compiler-flags="-objc"/>
   <resource-file src="src/ios/libWeiboSDK/WeiboSDK.bundle" />
@@ -175,7 +176,7 @@
     <source-file src="src/android/libs/mips64/libweibosdkcore.so" target-dir="libs/mips64/" />
     <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
     <source-file src="src/android/libs/x86_64/libweibosdkcore.so" target-dir="libs/x86_64/" />
-    <source-file src="src/android/libs/weiboSDKCore_3.1.2.jar" target-dir="libs/" />
+    <source-file src="src/android/libs/weiboSDKCore_3.1.4.jar" target-dir="libs/" />
   </platform>
 
 </plugin>

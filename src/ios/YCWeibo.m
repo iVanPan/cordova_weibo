@@ -52,6 +52,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
     NSString *token = [saveDefaults objectForKey:@"access_token"];
     [saveDefaults removeObjectForKey:@"userid"];
     [saveDefaults removeObjectForKey:@"access_token"];
+    [saveDefaults removeObjectForKey:@"expires_time"];
     [saveDefaults synchronize];
     if (token) {
         [WeiboSDK logOutWithToken:token delegate:self.appDelegate withTag:nil];
@@ -141,10 +142,12 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
             WBSendMessageToWeiboResponse *sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse *) response;
             NSString *accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
             NSString *userID = [sendMessageToWeiboResponse.authResponse userID];
-            if (accessToken && userID) {
+            NSString *expirationTime = [NSString stringWithFormat:@"%f",[sendMessageToWeiboResponse.authResponse.expirationDate timeIntervalSince1970] * 1000];
+            if (accessToken && userID && expirationTime) {
                 NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
                 [saveDefaults setValue:accessToken forKey:@"access_token"];
                 [saveDefaults setValue:userID forKey:@"userid"];
+                [saveDefaults setValue:expirationTime forKey:@"expires_time"];
                 [saveDefaults synchronize];
             }
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -177,9 +180,12 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
             NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
             [Dic setObject:[(WBAuthorizeResponse *) response userID] forKey:@"userid"];
             [Dic setObject:[(WBAuthorizeResponse *) response accessToken] forKey:@"access_token"];
+            [Dic setObject:[NSString stringWithFormat:@"%f",[(WBAuthorizeResponse *) response expirationDate].timeIntervalSince1970 * 1000] forKey:@"expires_time"];
+
             NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
             [saveDefaults setValue:[(WBAuthorizeResponse *) response userID] forKey:@"userid"];
             [saveDefaults setValue:[(WBAuthorizeResponse *) response accessToken] forKey:@"access_token"];
+            [saveDefaults setValue:[NSString stringWithFormat:@"%f",[(WBAuthorizeResponse *) response expirationDate].timeIntervalSince1970 * 1000] forKey:@"expires_time"];
             [saveDefaults synchronize];
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:Dic];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callback];

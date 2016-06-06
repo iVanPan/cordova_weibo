@@ -8,8 +8,9 @@ var app = function () {
   };
   this.ssoLogin = function () {
     YCWeibo.ssoLogin(function(args){
-     alert(args.access_token);
-     alert(args.userid);
+     alert("access token is "+args.access_token);
+     alert("userid is "+args.userid);
+      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
    },function(failReason){
      alert(failReason);
    });

@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.3.4">
+  version="0.3.5">
 
   <name>YCWeibo</name>
   <description>Cordova YCWeibo Plugin</description>
@@ -11,13 +11,14 @@
   <keywords>cordova,weibo</keywords>
   <repo>https://github.com/iVanPan/cordova_weibo.git</repo>
   <issue>https://github.com/iVanPan/cordova_weibo/issues</issue>
-  
+
   <preference name="WEIBO_APP_ID" />
-  
+
   <!--require cordova version -->
   <engines>
     <engine name="cordova" version=">=3.5.0" />
     <engine name="cordova-android" version=">=4.0.0-dev" />
+    <engine name="cordova-ios" version=">=4.0.0" />
   </engines>
 
   <!-- js module-->
@@ -56,14 +57,6 @@
       </dict>
     </array>
   </config-file>
-  
-   <!--allow non-HTTPS traffic -->
-    <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
-       <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-      </dict>
-    </config-file>
 
     <!--scheme query whitlist-->
     <config-file platform="ios" target="*-Info.plist" parent="LSApplicationQueriesSchemes">
@@ -77,7 +70,7 @@
   <header-file src="src/ios/YCWeibo.h"/>
   <source-file src="src/ios/YCWeibo.m"/>
 
-  <!-- Weibo sdk version 3.1.1 https://github.com/sinaweibosdk/weibo_ios_sdk -->
+  <!-- Weibo sdk version 3.1.4 https://github.com/sinaweibosdk/weibo_ios_sdk -->
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboToken.h" />
@@ -101,8 +94,8 @@
   <framework src="CoreText.framework" />
   <framework src="Foundation.framework" />
   <framework src="CoreGraphics.framework" />
-  <framework src="libz.dylib" />
-  <framework src="libsqlite3.dylib" />
+  <framework src="libz.tbd" />
+  <framework src="libsqlite3.tbd" />
   <info>
     安装完插件，请用XCode打开工程，查看URL Types里面weibo的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
   </info>
@@ -126,26 +119,26 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
   </config-file>
 
   <config-file target="AndroidManifest.xml" parent="/manifest/application">
     <!--android mianfest for weibo web authorization -->
-    <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser" 
+    <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
       android:configChanges="keyboardHidden|orientation"
       android:windowSoftInputMode="adjustResize"
-      android:exported="false" 
+      android:exported="false"
       android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
     </activity>
     <!--android mianfest for weibo mobile Register -->
-    <activity android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity" 
+    <activity android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity"
       android:configChanges="keyboardHidden|orientation"
       android:screenOrientation="portrait"
       android:windowSoftInputMode="adjustResize"
       android:exported="false" >
     </activity>
     <!--android mianfest for weibo select Country -->
-    <activity android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity" 
+    <activity android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
       android:configChanges="keyboardHidden|orientation"
       android:windowSoftInputMode="adjustResize"
       android:exported="false" >
@@ -168,7 +161,7 @@
     <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
     <source-file src="src/android/YCWeiboShareCallback.java" target-dir="src/org/zy/yuancheng/weibo" />
     <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
-    <!-- android weibo sdk version 3.1.1  https://github.com/sinaweibosdk/weibo_android_sdk-->
+    <!-- android weibo sdk version 3.1.4  https://github.com/sinaweibosdk/weibo_android_sdk-->
     <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
     <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
     <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/" />

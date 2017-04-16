@@ -1,4 +1,4 @@
-# Cordova_Weibo_Plugin
+# cordova-plugin-weibosdk
 [![version](https://img.shields.io/badge/version-0.3.5-blue.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
@@ -23,12 +23,11 @@ I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cord
 3. cordova build
 
 
-##Notes
+## Notes
 1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!				
 3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~Update:This Bug is fixed in last cordova version(5.1.1)				
-
-##ISSUES						
+## ISSUES						
 1.if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.
 
 ## Usage
@@ -72,15 +71,16 @@ YCWeibo.checkClientInstalled(function(){
 	console.log('client is not installed');
 });
 ```
-##Example			
+
+## Example			
 1. install this plugin
 2. backup www folder in your cordova project
 3. replace www by example_www
 4. cordova build & test
 
 
-##About WeiboSdk
+## About WeiboSdk
 you can downlaod last weibosdk [here](https://github.com/sinaweibosdk) .if you find any problem about weibosdk, open an isssus please.
 
-##About Get User Info
+## About Get User Info
 after weibo sso Login,you can get access_token and userid,using get method to get user info directly with url https://api.weibo.com/2/users/show.json?uid=xxxx&access_token=xxxx

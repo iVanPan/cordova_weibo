@@ -5,7 +5,7 @@
 [![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
 
 This is a Cordova Plugin for WeiboSDK. [简体中文](https://github.com/iVanPan/cordova_weibo/blob/master/README_ZH.md)  
-I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cordova_QQ).
+
 ## Feature
 - Weibo SSO Login
 - Weibo Logout
@@ -18,38 +18,41 @@ I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cord
 - Cordova-iOS >=4.0			
 
 ## Installation
-1. ```cordova plugin add https://github.com/iVanPan/cordova_weibo.git --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```  or    ```cordova plugin add cordova-plugin-weibosdk --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```
+1. ```cordova plugin add cordova-plugin-weibosdk --variable WEIBO_APP_ID=YOUR_WEIBO_APPID```
 2. Add ```<preference name="REDIRECTURI" value="YOUR_WEIBO_REDIRECTURI" />``` in your config.xml If you don't add this preference the defualt redirecturi is https://api.weibo.com/oauth2/default.html               
 3. cordova build
 
 
 ## Notes
-1. This plugin is required cordova-android version >=4.0,so using cordova  5.0.0 or higher is recommended
+1. This plugin is required Cordova-android version >= 4.0,so using Cordova  5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!				
-3. ~~If cordova version  <5.1.1,when two cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~Update:This Bug is fixed in last cordova version(5.1.1)				
+3. ~~If Cordova version  <5.1.1,when two Cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~Update:This Bug is fixed in last Cordova version(5.1.1)				
 ## ISSUES						
-1.if you are sharing webpage without weibo app client	,the webpage sharing becomes text sharing.
+1.if you are sharing webpage without weibo app client,the webpage sharing becomes text sharing.
 
 ## Usage
+
 ### Weibo SSO Login
 ```Javascript
 YCWeibo.ssoLogin(function(args){
-	alert("access token is "+args.access_token);
-	alert("userid is "+args.userid);
-	alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
-    },function(failReason){
-        console.log(failReason);
+     alert("access token is "+args.access_token);
+     alert("userid is "+args.userid);
+     alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+ },function(failReason){
+     console.log(failReason);
 });
 ```
 ### Weibo Logout
+
 ```Javascript
 YCWeibo.logout(function(){
-	console.log('logout success');
+     console.log('logout success');
 },function(failReason){
-	console.log(failReason);
+     console.log(failReason);
 });
 ```
 ### Weibo Webpage Share
+
 ```Javascript
 var args = {};
 args.url = "http://www.baidu.com";
@@ -66,9 +69,9 @@ YCWeibo.shareToWeibo(function () {
 ### CheckClientInstalled
 ```Javascript
 YCWeibo.checkClientInstalled(function(){
-	console.log('client is installed');
+    console.log('client is installed');
 },function(){
-	console.log('client is not installed');
+    console.log('client is not installed');
 });
 ```
 

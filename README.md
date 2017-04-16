@@ -34,11 +34,11 @@ I also write a cordova plugin  for qq sdk [here](https://github.com/iVanPan/Cord
 ### Weibo SSO Login
 ```Javascript
 YCWeibo.ssoLogin(function(args){
-			alert("access token is "+args.access_token);
-	    alert("userid is "+args.userid);
-	    alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
-      },function(failReason){
-         console.log(failReason);
+	alert("access token is "+args.access_token);
+	alert("userid is "+args.userid);
+	alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+    },function(failReason){
+        console.log(failReason);
 });
 ```
 ### Weibo Logout

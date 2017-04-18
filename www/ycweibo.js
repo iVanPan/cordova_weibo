@@ -32,6 +32,9 @@ module.exports = {
 	},
 	checkClientInstalled:function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "YCWeibo", "checkClientInstalled", []);
+	},
+	weiboCommon : function(successCallback, errorCallback,url,method,args){
+	    exec(successCallback, errorCallback, "YCWeibo", "weiboCommon", [url,method,args]);
 	}
 
 };

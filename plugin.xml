@@ -1,45 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.3.5">
+  version="0.5.0">
 
-  <name>YCWeibo</name>
-  <description>Cordova YCWeibo Plugin</description>
+  <name>cordova-plugin-weibosdk</name>
+  <description>A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboShating etc</description>
   <license>MIT</license>
-  <keywords>cordova,weibo</keywords>
+  <keywords>Cordova,Weibo</keywords>
   <repo>https://github.com/iVanPan/cordova_weibo.git</repo>
   <issue>https://github.com/iVanPan/cordova_weibo/issues</issue>
 
   <preference name="WEIBO_APP_ID" />
-
   <!--require cordova version -->
   <engines>
     <engine name="cordova" version=">=3.5.0" />
-    <engine name="cordova-android" version=">=4.0.0-dev" />
+    <engine name="cordova-android" version=">=4.0.0" />
     <engine name="cordova-ios" version=">=4.0.0" />
   </engines>
 
   <!-- js module-->
-  <js-module src="www/ycweibo.js" name="ycweibo">
-    <clobbers target="YCWeibo" />
+  <js-module src="www/weibo.js" name="WeiboSDK">
+    <clobbers target="WeiboSDK" />
   </js-module>
 
   <!-- ios -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
-      <feature name="YCWeibo">
-       <param name="ios-package" value="YCWeibo"/>
-     </feature>
-     <access origin="https://open.weibo.cn/*" />
+      <feature name="WeiboSDK">
+        <param name="ios-package" value="CDVWeiboSDK"/>
+      </feature>
+     <access origin="https://*.weibo.cn/*" />
      <access origin="https://*.sina.cn/*" />
-     <access origin="https://login.sina.com.cn/*" />
-     <access origin="https://passport.weibo.cn/*"/>
-     <access origin="http://service.weibo.com/share/*"/>
+     <access origin="https://*.sinaimg.cn/*" />
+     <access origin="https://*.weibo.com/*"/>
      <access origin="http://*.sinajs.cn/*"/>
      <access origin="http://*.sina.com.cn/*"/>
-     <access origin="https://api.weibo.com/*"/>
      <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
    <!--set ios URLTypes for Weibo -->
@@ -57,19 +53,17 @@
       </dict>
     </array>
   </config-file>
-
-    <!--scheme query whitlist-->
-    <config-file platform="ios" target="*-Info.plist" parent="LSApplicationQueriesSchemes">
-        <array>
+  <!--scheme query whitlist-->
+  <config-file platform="ios" target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
 		    <string>sinaweibohd</string>
 		    <string>sinaweibo</string>
 		    <string>weibosdk</string>
 		    <string>weibosdk2.5</string>
-        </array>
-    </config-file>
-  <header-file src="src/ios/YCWeibo.h"/>
-  <source-file src="src/ios/YCWeibo.m"/>
-
+      </array>
+  </config-file>
+  <header-file src="src/ios/CDVWeiboSDK.h"/>
+  <source-file src="src/ios/CDVWeiboSDK.m"/>
   <!-- Weibo sdk version 3.1.4 https://github.com/sinaweibosdk/weibo_ios_sdk -->
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
@@ -103,8 +97,8 @@
 <!-- android -->
 <platform name="android">
   <config-file target="res/xml/config.xml" parent="/*">
-    <feature name="YCWeibo" >
-      <param name="android-package" value="org.zy.yuancheng.weibo.YCWeibo"/>
+    <feature name="WeiboSDK" >
+      <param name="android-package" value="me.vanpan.weibosdk.WeiboSDKPlugin"/>
     </feature>
     <access origin="https://open.weibo.cn/*" />
     <access origin="https://login.sina.com.cn/*" />
@@ -121,31 +115,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
   </config-file>
-
   <config-file target="AndroidManifest.xml" parent="/manifest/application">
-    <!--android mianfest for weibo web authorization -->
-    <activity android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-      android:configChanges="keyboardHidden|orientation"
-      android:windowSoftInputMode="adjustResize"
-      android:exported="false"
-      android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-    </activity>
-    <!--android mianfest for weibo mobile Register -->
-    <activity android:name="com.sina.weibo.sdk.register.mobile.MobileRegisterActivity"
-      android:configChanges="keyboardHidden|orientation"
-      android:screenOrientation="portrait"
-      android:windowSoftInputMode="adjustResize"
-      android:exported="false" >
-    </activity>
-    <!--android mianfest for weibo select Country -->
-    <activity android:name="com.sina.weibo.sdk.register.mobile.SelectCountryActivity"
-      android:configChanges="keyboardHidden|orientation"
-      android:windowSoftInputMode="adjustResize"
-      android:exported="false" >
-    </activity>
     <!--android mianfest for weibo share callback -->
     <activity
-      android:name="org.zy.yuancheng.weibo.YCWeiboShareCallback"
+      android:name="me.vanpan.weibosdk.WeiboSDKShareCallback"
       android:configChanges="keyboardHidden|orientation"
       android:screenOrientation="portrait" >
       <intent-filter>
@@ -153,23 +126,11 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
-    <!--android mianfest for weibo downloadService-->
-    <service android:name="com.sina.weibo.sdk.net.DownloadService"
-      android:exported="false"></service>
-    </config-file>
-
-    <source-file src="src/android/YCWeibo.java" target-dir="src/org/zy/yuancheng/weibo" />
-    <source-file src="src/android/YCWeiboShareCallback.java" target-dir="src/org/zy/yuancheng/weibo" />
-    <source-file src="src/android/AccessTokenKeeper.java" target-dir="src/org/zy/yuancheng/weibo" />
-    <!-- android weibo sdk version 3.1.4  https://github.com/sinaweibosdk/weibo_android_sdk-->
-    <source-file src="src/android/libs/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/" />
-    <source-file src="src/android/libs/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/" />
-    <source-file src="src/android/libs/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/" />
-    <source-file src="src/android/libs/mips/libweibosdkcore.so" target-dir="libs/mips/" />
-    <source-file src="src/android/libs/mips64/libweibosdkcore.so" target-dir="libs/mips64/" />
-    <source-file src="src/android/libs/x86/libweibosdkcore.so" target-dir="libs/x86/" />
-    <source-file src="src/android/libs/x86_64/libweibosdkcore.so" target-dir="libs/x86_64/" />
-    <source-file src="src/android/libs/weiboSDKCore_3.1.4.jar" target-dir="libs/" />
-  </platform>
-
+  </config-file>
+  <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
+  <source-file src="src/android/WeiboSDKShareCallback.java" target-dir="src/me/vanpan/weibosdk" />
+  <!-- android weibo sdk version 3.2.0  https://github.com/sinaweibosdk/weibo_android_sdk-->
+  <source-file src="src/android/libs/openDefault-1.0.0-openDefaultRelease.aar" target-dir="libs/" />
+  <framework src="src/android/libs/WeiboSDKPlugin.gradle" custom="true" type="gradleReference" />
+</platform>
 </plugin>

@@ -1,12 +1,11 @@
 #import <Cordova/CDVPlugin.h>
-#import <Cordova/CDVPluginResult.h>
 #import "WeiboSDK.h"
 
-@interface YCWeibo : CDVPlugin <WeiboSDKDelegate>
+@interface CDVWeiboSDK : CDVPlugin <WeiboSDKDelegate, WBHttpRequestDelegate>
 
-@property(nonatomic, copy) NSString *callback;
-@property(nonatomic, copy) NSString *redirectURI;
-@property(nonatomic, copy) NSString *weiboAppId;
+@property (nonatomic, copy) NSString *callbackId;
+@property (nonatomic, copy) NSString *redirectURI;
+@property (nonatomic, copy) NSString *weiboAppId;
 
 - (void)ssoLogin:(CDVInvokedUrlCommand *)command;
 
@@ -15,4 +14,5 @@
 - (void)shareToWeibo:(CDVInvokedUrlCommand *)command;
 
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
+
 @end

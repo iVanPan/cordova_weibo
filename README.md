@@ -28,7 +28,7 @@ A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access 
 ## Notes
 1. This plugin is required Cordova-android version >= 4.0,so using Cordova 5.0.0 or higher is recommended
 2. This plugin should be used after the deviceready event has been fired!!!				
-3. ~~ If Cordova version  <5.1.1,when two Cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~  Update:This Bug is fixed in last Cordova version(5.1.1)	
+3. ~~If Cordova version  <5.1.1,when two Cordova plugins are modifying “*-Info.plist” CFBundleURLTypes, only the first added plugin is getting the changes applied.so after installing plugin,please check the URLTypes in your Xcode project.You can find this issue [here](https://issues.apache.org/jira/browse/CB-8007).~~  Update:This Bug is fixed in last Cordova version(5.1.1)	
 
 
 ## Usage

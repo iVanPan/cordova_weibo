@@ -15,4 +15,6 @@
 - (void)shareToWeibo:(CDVInvokedUrlCommand *)command;
 
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
+
+- (void)weiboCommon:(CDVInvokedUrlCommand *)command;
 @end

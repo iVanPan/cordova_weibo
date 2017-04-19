@@ -232,13 +232,14 @@ public class WeiboSDKPlugin extends CordovaPlugin {
      * 组装JSON
      *
      * @param access_token
-     * @param userid
+     * @param userId
      * @param expires_time
      * @return
      */
-    private JSONObject makeJson(String access_token, String userid, long expires_time) {
+    private JSONObject makeJson(String access_token, String userId, long expires_time) {
         String json = "{\"access_token\": \"" + access_token + "\", " +
-            " \"userid\": \"" + userid + "\", " +
+            " \"userId\": \"" + userId
+            + "\", " +
             " \"expires_time\": \"" + String.valueOf(expires_time) + "\"" +
             "}";
         JSONObject jo = null;

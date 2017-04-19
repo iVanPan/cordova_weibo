@@ -67,7 +67,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
 - (void)logout:(CDVInvokedUrlCommand *)command {
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [saveDefaults objectForKey:@"access_token"];
-    [saveDefaults removeObjectForKey:@"userid"];
+    [saveDefaults removeObjectForKey:@"userId"];
     [saveDefaults removeObjectForKey:@"access_token"];
     [saveDefaults removeObjectForKey:@"expires_time"];
     [saveDefaults synchronize];
@@ -129,12 +129,12 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
         if (response.statusCode == WeiboSDKResponseStatusCodeSuccess) {
             WBSendMessageToWeiboResponse *sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse *)response;
             NSString *accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
-            NSString *userID = [sendMessageToWeiboResponse.authResponse userID];
+            NSString *userId = [sendMessageToWeiboResponse.authResponse userID];
             NSString *expirationTime = [NSString stringWithFormat:@"%f", [sendMessageToWeiboResponse.authResponse.expirationDate timeIntervalSince1970] * 1000];
-            if (accessToken && userID && expirationTime) {
+            if (accessToken && userId && expirationTime) {
                 NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
                 [saveDefaults setValue:accessToken forKey:@"access_token"];
-                [saveDefaults setValue:userID forKey:@"userid"];
+                [saveDefaults setValue:userId forKey:@"userId"];
                 [saveDefaults setValue:expirationTime forKey:@"expires_time"];
                 [saveDefaults synchronize];
             }
@@ -165,11 +165,11 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
     } else if ([response isKindOfClass:WBAuthorizeResponse.class]) {
         if (response.statusCode == WeiboSDKResponseStatusCodeSuccess) {
             NSMutableDictionary *Dic = [NSMutableDictionary dictionaryWithCapacity:2];
-            [Dic setObject:[(WBAuthorizeResponse *)response userID] forKey:@"userid"];
+            [Dic setObject:[(WBAuthorizeResponse *)response userID] forKey:@"userId"];
             [Dic setObject:[(WBAuthorizeResponse *)response accessToken] forKey:@"access_token"];
             [Dic setObject:[NSString stringWithFormat:@"%f", [(WBAuthorizeResponse *)response expirationDate].timeIntervalSince1970 * 1000] forKey:@"expires_time"];
             NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
-            [saveDefaults setValue:[(WBAuthorizeResponse *)response userID] forKey:@"userid"];
+            [saveDefaults setValue:[(WBAuthorizeResponse *)response userID] forKey:@"userId"];
             [saveDefaults setValue:[(WBAuthorizeResponse *)response accessToken] forKey:@"access_token"];
             [saveDefaults setValue:[NSString stringWithFormat:@"%f", [(WBAuthorizeResponse *)response expirationDate].timeIntervalSince1970 * 1000] forKey:@"expires_time"];
             [saveDefaults synchronize];

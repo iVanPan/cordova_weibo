@@ -33,45 +33,45 @@
 ## 使用方法
 ### 微博SSO登录
 ```Javascript
-WeiboSDK.ssoLogin(function(args){
-   alert("access token is "+args.access_token);
-   alert("userid is "+args.userid);
-   alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
- },function(failReason){
-   console.log(failReason);
+WeiboSDK.ssoLogin(function (args) {
+   alert('access token is ' + args.access_token);
+   alert('userId is ' + args.userId);
+   alert('expires_time is ' + new Date(parseInt(args.expires_time)) + ' TimeStamp is ' + args.expires_time);
+}, function (failReason) {
+   alert(failReason);
 });
 ```
 
 
 ### 微博登出
 ```Javascript
-WeiboSDK.logout(function(){
-   console.log('logout success');
-},function(failReason){
-  console.log(failReason);
+WeiboSDK.logout(function () {
+   alert('logout success');
+}, function (failReason) {
+   alert(failReason);
 });
 ```
 
 ### 微博分享
 ```Javascript
 var args = {};
-args.url = "https://cordova.apache.org/";
-args.title = "Apache Cordova";
-args.description = "This is a Cordova Plugin";
-args.image = "https://cordova.apache.org/static/img/pluggy.png"; 
+args.url = 'https://cordova.apache.org/';
+args.title = 'Apache Cordova';
+args.description = 'This is a Cordova Plugin';
+args.image = 'https://cordova.apache.org/static/img/pluggy.png';
 WeiboSDK.shareToWeibo(function () {
-   alert("share success");
- }, function (failReason) {
+   alert('share success');
+}, function (failReason) {
    alert(failReason);
- }, args);
+}, args);
 ```
 
 ### 检查微博客户端是否安装
 ```Javascript
-WeiboSDK.checkClientInstalled(function(){
-   console.log('client is installed');
-},function(){
-   console.log('client is not installed');
+WeiboSDK.checkClientInstalled(function () {
+   alert('client is installed');
+}, function () {
+   alert('client is not installed');
 });
 ```
 

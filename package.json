@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-weibosdk",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "codrova/phonegap wrapper for weibo sdk",
   "main": "index.js",
   "scripts": {
@@ -35,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/iVanPan/cordova_weibo/issues"
   },
-  "homepage": "https://github.com/iVanPan/cordova_weibo"
+  "homepage": "https://github.com/iVanPan/cordova_weibo",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }

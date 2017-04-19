@@ -38,8 +38,83 @@
      <access origin="http://*.sina.com.cn/*"/>
      <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
    </config-file>
+<!--     <config-file platform="ios" target="*-Info.plist" parent="NSAppTransportSecurity">
+        <dict>
+          <key>NSAllowsArbitraryLoads</key>
+          <false/>
+          <key>NSExceptionDomains</key>
+          <dict>
+            <key>weibo.cn</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+            <key>sina.cn</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+            <key>sinaimg.cn</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+            <key>weibo.com</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+            <key>sinajs.cn</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+            <key>sina.com.cn</key>
+            <dict>
+              <key>NSExceptionAllowsInsecureHTTPLoads</key>
+              <true/>
+              <key>NSIncludesSubdomains</key>
+              <true/>
+              <key>NSExceptionMinimumTLSVersion</key>
+              <string>TLSv1.0</string>
+              <key>NSExceptionRequiresForwardSecrecy</key>
+              <false/>
+            </dict>
+          </dict>
+        </dict>
+      </config-file> -->
    <!--set ios URLTypes for Weibo -->
-   <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+   <config-file platform="ios" target="*-Info.plist" parent="CFBundleURLTypes">
     <array>
       <dict>
         <key>CFBundleTypeRole</key>
@@ -91,7 +166,9 @@
   <framework src="libz.tbd" />
   <framework src="libsqlite3.tbd" />
   <info>
-    安装完插件，请用XCode打开工程，查看URL Types里面weibo的URL type有没有，如果没有请手动添加/after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
+    1.安装完这个插件,请用 Xcode 打开工程,查看 URL Types 里面 Weibo 的 URL Type 有没有，如果没有请手动添加。
+    // ENGLISH
+    1.after installing this plugin,check the URL Types in your Xcode project.If you don't find URL Types for weibosdk，manually add it.
   </info>
 </platform>
 <!-- android -->

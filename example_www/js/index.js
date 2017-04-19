@@ -1,39 +1,40 @@
 var app = function () {
+
   this.checkClientInstalled = function () {
-    WeiboSDK.checkClientInstalled(function(){
+    WeiboSDK.checkClientInstalled(function () {
       alert('client is installed');
-    },function(){
+    }, function () {
       alert('client is not installed');
     });
   };
 
   this.ssoLogin = function () {
-    WeiboSDK.ssoLogin(function(args){
-      alert("access token is "+args.access_token);
-      alert("userid is "+args.userid);
-      alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
-   },function(failReason){
+    WeiboSDK.ssoLogin(function (args) {
+      alert('access token is ' + args.access_token);
+      alert('userId is ' + args.userId);
+      alert('expires_time is ' + new Date(parseInt(args.expires_time)) + ' TimeStamp is ' + args.expires_time);
+    }, function (failReason) {
       alert(failReason);
-   });
+    });
   };
 
   this.shareToWeibo = function () {
     var args = {};
-    args.url = "https://cordova.apache.org/";
-    args.title = "Apache Cordova";
-    args.description = "This is a Cordova Plugin";
-    args.image = "https://cordova.apache.org/static/img/pluggy.png"; 
+    args.url = 'https://cordova.apache.org/';
+    args.title = 'Apache Cordova';
+    args.description = 'This is a Cordova Plugin';
+    args.image = 'https://cordova.apache.org/static/img/pluggy.png';
     WeiboSDK.shareToWeibo(function () {
-      alert("share success");
+      alert('share success');
     }, function (failReason) {
       alert(failReason);
     }, args);
   };
 
   this.logout = function () {
-    WeiboSDK.logout(function(){
+    WeiboSDK.logout(function () {
       alert('logout success');
-    },function(failReason){
+    }, function (failReason) {
       alert(failReason);
     });
   }

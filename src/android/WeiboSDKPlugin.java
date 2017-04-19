@@ -171,8 +171,9 @@ public class WeiboSDKPlugin extends CordovaPlugin {
         try {
             data = args.getJSONObject(0);
             String text = data.has("title")?  data.getString("title"): "";
+            String url = data.has("url")?  data.getString("url"): "";
             TextObject textObject = new TextObject();
-            textObject.text = text;
+            textObject.text = text + " " + url;
             weiboMessage.textObject = textObject;
             String image = data.has("image")?  data.getString("image"): "";
             Bitmap imageData = processImage(image);

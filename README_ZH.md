@@ -26,7 +26,7 @@
 3. 命令行运行 cordova build   					
 
 # 注意事项
-1. 这个插件要求 Cordova-android 的版本 >=4.0,推荐使用 Cordova  5.0.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-android 4.0 是默认使用的 Android 版本
+1. 这个插件要求 Cordova-Android 的版本 >=4.0,推荐使用 Cordova 5.0 或更高的版本，因为从 Cordova 5.0 开始 Cordova-Android 4.0 是默认使用的 Android 版本
 2. 请在 Cordova 的 deviceready 事件触发以后再调用本插件!!!!!  
 3. <del>在低于5.1.1的 Cordova 版本中存在一个 Bug，如果你有多个插件要修改 iOS 工程中的 “*-Info.plist” CFBundleURLTypes, 只有第一个安装的插件才会生效.所以安装完插件请务必在你的 Xcode 工程里面检查一下 URLTypes。 关于这个 bug 的详情你可以在 [这里](https://issues.apache.org/jira/browse/CB-8007)找到</del> 建议安装使用5.1.1及以上的 Cordova 版本 						
 

@@ -64,18 +64,11 @@
   </config-file>
   <header-file src="src/ios/CDVWeiboSDK.h"/>
   <source-file src="src/ios/CDVWeiboSDK.m"/>
-  <!-- Weibo sdk version 3.1.4 https://github.com/sinaweibosdk/weibo_ios_sdk -->
+  <!-- Weibo sdk version 3.2.0 https://github.com/sinaweibosdk/weibo_ios_sdk -->
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
-  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboToken.h" />
-  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboUser.h" />
-  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboGame.h" />
-  <header-file src="src/ios/libWeiboSDK/WBSDKBasicButton.h" />
-  <header-file src="src/ios/libWeiboSDK/WBSDKCommentButton.h" />
-  <header-file src="src/ios/libWeiboSDK/WBSDKRelationshipButton.h" />
   <header-file src="src/ios/libWeiboSDK/WeiboSDK.h" />
   <header-file src="src/ios/libWeiboSDK/WeiboSDK+Statistics.h" />
-  <header-file src="src/ios/libWeiboSDK/WeiboUser.h" />
   <source-file src="src/ios/libWeiboSDK/libWeiboSDK.a" framework="true"  compiler-flags="-objc"/>
   <resource-file src="src/ios/libWeiboSDK/WeiboSDK.bundle" />
 

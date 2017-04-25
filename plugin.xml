@@ -110,22 +110,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
   </config-file>
-  <config-file target="AndroidManifest.xml" parent="/manifest/application">
-    <!--android mianfest for weibo share callback -->
-    <activity
-      android:name="me.vanpan.weibosdk.WeiboSDKShareCallback"
-      android:configChanges="keyboardHidden|orientation"
-      android:screenOrientation="portrait" >
-      <intent-filter>
-        <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-        <category android:name="android.intent.category.DEFAULT" />
-      </intent-filter>
-    </activity>
-  </config-file>
+
   <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
   <source-file src="src/android/WeiboSDKShareCallback.java" target-dir="src/me/vanpan/weibosdk" />
-  <!-- android weibo sdk version 3.2.0  https://github.com/sinaweibosdk/weibo_android_sdk-->
-  <source-file src="src/android/libs/openDefault-1.0.0-openDefaultRelease.aar" target-dir="libs/" />
+  <!-- android weibo sdk version 4.0.0  https://github.com/sinaweibosdk/weibo_android_sdk-->
+  <source-file src="src/android/libs/openDefault-2.0.0-openDefaultRelease.aar" target-dir="libs/" />
   <framework src="src/android/libs/WeiboSDKPlugin.gradle" custom="true" type="gradleReference" />
 </platform>
 </plugin>

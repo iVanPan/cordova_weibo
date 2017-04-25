@@ -6,7 +6,7 @@ repositories{
 }
 
 dependencies {
-    compile(name: 'openDefault-1.0.0-openDefaultRelease', ext: 'aar')
+    compile(name: 'openDefault-2.0.0-openDefaultRelease', ext: 'aar')
 }
 android {
     packagingOptions {

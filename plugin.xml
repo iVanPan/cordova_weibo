@@ -112,7 +112,6 @@
   </config-file>
 
   <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
-  <source-file src="src/android/WeiboSDKShareCallback.java" target-dir="src/me/vanpan/weibosdk" />
   <!-- android weibo sdk version 4.0.0  https://github.com/sinaweibosdk/weibo_android_sdk-->
   <source-file src="src/android/libs/openDefault-2.0.0-openDefaultRelease.aar" target-dir="libs/" />
   <framework src="src/android/libs/WeiboSDKPlugin.gradle" custom="true" type="gradleReference" />

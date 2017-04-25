@@ -1,23 +1,26 @@
 package me.vanpan.weibosdk;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.webkit.URLUtil;
+
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.WeiboAppManager;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
-import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
-import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
-import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+import com.sina.weibo.sdk.auth.AccessTokenKeeper;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
-import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.auth.WbAppInfo;
+import com.sina.weibo.sdk.auth.WbConnectErrorMessage;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
-import com.sina.weibo.sdk.exception.WeiboException;
-import com.sina.weibo.sdk.auth.sso.AccessTokenKeeper;
+import com.sina.weibo.sdk.share.WbShareCallback;
+import com.sina.weibo.sdk.share.WbShareHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +33,7 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeiboSDKPlugin extends CordovaPlugin {
+public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
 
     private static final String SCOPE = "email,direct_messages_read,direct_messages_write,"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
@@ -42,10 +45,11 @@ public class WeiboSDKPlugin extends CordovaPlugin {
     private static final String WEIBO_EXCEPTION = "weibo exception";
     private static final String PARAM_ERROR = "param error";
     private static final String ONLY_GET_CODE = "only get code";
+    private static final String SHARE_FAIL ="sharefail";
     private static final String WEIBO_CLIENT_NOT_INSTALLED = "weibo client is not installed";
     public static CallbackContext currentCallbackContext;
     public static String APP_KEY;
-    public static IWeiboShareAPI mWeiboShareAPI = null;
+    public static WbShareHandler shareHandler = null;
     private Oauth2AccessToken mAccessToken;
     private String REDIRECT_URL;
     private SsoHandler mSsoHandler;
@@ -55,6 +59,7 @@ public class WeiboSDKPlugin extends CordovaPlugin {
         super.pluginInitialize();
         APP_KEY = webView.getPreferences().getString(WEBIO_APP_ID, "");
         REDIRECT_URL = webView.getPreferences().getString(WEBIO_REDIRECT_URL, DEFAULT_URL);
+        WbSdk.install(WeiboSDKPlugin.this.cordova.getActivity(),new AuthInfo(WeiboSDKPlugin.this.cordova.getActivity(), APP_KEY, REDIRECT_URL, SCOPE));
     }
 
     @Override
@@ -80,14 +85,11 @@ public class WeiboSDKPlugin extends CordovaPlugin {
      */
     private boolean ssoLogin(CallbackContext callbackContext) {
         currentCallbackContext = callbackContext;
-        AuthInfo mAuthInfo = new AuthInfo(WeiboSDKPlugin.this.cordova.getActivity(),
-                APP_KEY, REDIRECT_URL, SCOPE);
-        mSsoHandler = new SsoHandler(WeiboSDKPlugin.this.cordova.getActivity(),
-                mAuthInfo);
+        mSsoHandler = new SsoHandler(WeiboSDKPlugin.this.cordova.getActivity());
         Runnable runnable = new Runnable() {
             public void run() {
                 if (mSsoHandler != null) {
-                    mSsoHandler.authorize(AuthListener);
+                    mSsoHandler.authorize(new SelfWbAuthListener());
                 }
             }
         };
@@ -103,13 +105,8 @@ public class WeiboSDKPlugin extends CordovaPlugin {
      * @return
      */
     private boolean checkClientInstalled(CallbackContext callbackContext) {
-        AuthInfo mAuthInfo = new AuthInfo(WeiboSDKPlugin.this.cordova.getActivity(),
-                APP_KEY, REDIRECT_URL, SCOPE);
-        if (mSsoHandler == null) {
-            mSsoHandler = new SsoHandler(WeiboSDKPlugin.this.cordova.getActivity(),
-                    mAuthInfo);
-        }
-        Boolean installed = mSsoHandler.isWeiboAppInstalled();
+        WbAppInfo wbAppInfo = WeiboAppManager.getInstance(WeiboSDKPlugin.this.cordova.getActivity()).getWbAppInfo();
+        Boolean installed = (wbAppInfo != null && wbAppInfo.isLegal());
         if (installed) {
             callbackContext.success();
         } else {
@@ -126,6 +123,7 @@ public class WeiboSDKPlugin extends CordovaPlugin {
      */
     private boolean logout(CallbackContext callbackContext) {
         AccessTokenKeeper.clear(this.cordova.getActivity());
+        mAccessToken = new Oauth2AccessToken();
         callbackContext.success();
         return true;
     }
@@ -140,9 +138,10 @@ public class WeiboSDKPlugin extends CordovaPlugin {
     private boolean shareToWeibo(final CallbackContext callbackContext,
                                  final CordovaArgs args) {
         currentCallbackContext = callbackContext;
-        mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(
-                this.cordova.getActivity(), APP_KEY);
-        mWeiboShareAPI.registerApp();
+        if (shareHandler == null) {
+            shareHandler = new WbShareHandler(WeiboSDKPlugin.this.cordova.getActivity());
+        }
+        shareHandler.registerApp();
         cordova.getThreadPool().execute(new Runnable() {
 
             @Override
@@ -170,57 +169,29 @@ public class WeiboSDKPlugin extends CordovaPlugin {
         final JSONObject data;
         try {
             data = args.getJSONObject(0);
-            String text = data.has("title")?  data.getString("title"): "";
+            String title = data.has("title")?  data.getString("title"): "";
             String url = data.has("url")?  data.getString("url"): "";
-            TextObject textObject = new TextObject();
-            textObject.text = text + " " + url;
-            weiboMessage.textObject = textObject;
+            String description = data.has("description")?  data.getString("description"): "";
             String image = data.has("image")?  data.getString("image"): "";
             Bitmap imageData = processImage(image);
+            //WebpageObject mediaObject = new WebpageObject();
+            //mediaObject.identify = Utility.generateGUID();
+            //mediaObject.title = title;
+            //mediaObject.description = description;
+            //mediaObject.actionUrl = url;
             if (imageData != null) {
                 //注意：最终压缩过的缩略图大小不得超过 32kb。
                 ImageObject imageObject = new ImageObject();
                 imageObject.setImageObject(imageData);
                 weiboMessage.imageObject = imageObject;
-
+               // mediaObject.setThumbImage(imageData);
             }
-            // 2. 初始化从第三方到微博的消息请求
-            SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
-            // 用transaction唯一标识一个请求
-            request.transaction = String.valueOf(System.currentTimeMillis());
-            request.multiMessage = weiboMessage;
-            // 3. 发送请求消息到微博，唤起微博分享界面
-            AuthInfo authInfo = new AuthInfo(WeiboSDKPlugin.this.cordova.getActivity(), APP_KEY, REDIRECT_URL, SCOPE);
-            Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(WeiboSDKPlugin.this.cordova.getActivity());
-            String token = "";
-            if (accessToken != null) {
-                token = accessToken.getToken();
-            }
-            mWeiboShareAPI.sendRequest(WeiboSDKPlugin.this.cordova.getActivity(), request, authInfo, token, new WeiboAuthListener() {
-
-                @Override
-                public void onWeiboException(WeiboException arg0) {
-                    WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                            PluginResult.Status.ERROR, WEIBO_EXCEPTION),
-                        callbackContext.getCallbackId());
-                }
-
-                @Override
-                public void onComplete(Bundle bundle) {
-                    // TODO Auto-generated method stub
-                    Oauth2AccessToken newToken = Oauth2AccessToken.parseAccessToken(bundle);
-                    AccessTokenKeeper.writeAccessToken(WeiboSDKPlugin.this.cordova.getActivity(), newToken);
-                    WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                        PluginResult.Status.OK), callbackContext.getCallbackId());
-                }
-
-                @Override
-                public void onCancel() {
-                    WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                            PluginResult.Status.ERROR, CANCEL_BY_USER),
-                        callbackContext.getCallbackId());
-                }
-            });
+           // weiboMessage.mediaObject = mediaObject;
+            TextObject textObject = new TextObject();
+            textObject.text = description + " " + url;
+            textObject.title = title;
+            weiboMessage.textObject = textObject;
+            shareHandler.shareMessage(weiboMessage, true);
         } catch (JSONException e) {
             WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
                     PluginResult.Status.ERROR, PARAM_ERROR),
@@ -332,21 +303,35 @@ public class WeiboSDKPlugin extends CordovaPlugin {
         return bitmap;
     }
 
-    /**
-     * 微博auth监听
-     */
-    WeiboAuthListener AuthListener = new WeiboAuthListener() {
+    @Override public void onWbShareSuccess() {
+        WeiboSDKPlugin.currentCallbackContext.success();
+    }
 
+    @Override public void onWbShareCancel() {
+        WeiboSDKPlugin.currentCallbackContext.error(CANCEL_BY_USER);
+    }
+
+    @Override public void onWbShareFail() {
+        WeiboSDKPlugin.currentCallbackContext.error(SHARE_FAIL);
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
+    }
+
+    private class SelfWbAuthListener implements com.sina.weibo.sdk.auth.WbAuthListener{
         @Override
-        public void onComplete(Bundle values) {
-            mAccessToken = Oauth2AccessToken.parseAccessToken(values);
+        public void onSuccess(final Oauth2AccessToken token) {
+            mAccessToken = token;
             if (mAccessToken.isSessionValid()) {
                 AccessTokenKeeper.writeAccessToken(
-                        WeiboSDKPlugin.this.cordova.getActivity(), mAccessToken);
+                    WeiboSDKPlugin.this.cordova.getActivity(), mAccessToken);
                 JSONObject jo = makeJson(mAccessToken.getToken(),
-                        mAccessToken.getUid(),mAccessToken.getExpiresTime());
+                    mAccessToken.getUid(),mAccessToken.getExpiresTime());
                 WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                        PluginResult.Status.OK, jo), currentCallbackContext.getCallbackId());
+                    PluginResult.Status.OK, jo), currentCallbackContext.getCallbackId());
             } else {
                 // 以下几种情况，您会收到 Code：
                 // 1. 当您未在平台上注册的应用程序的包名与签名时；
@@ -354,23 +339,23 @@ public class WeiboSDKPlugin extends CordovaPlugin {
                 // 3. 当您在平台上注册的包名和签名与您当前测试的应用的包名和签名不匹配时。
                 // String code = values.getString("code");
                 WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                                PluginResult.Status.ERROR, ONLY_GET_CODE),
-                        currentCallbackContext.getCallbackId());
+                        PluginResult.Status.ERROR, ONLY_GET_CODE),
+                    currentCallbackContext.getCallbackId());
             }
         }
 
         @Override
-        public void onCancel() {
+        public void cancel() {
             WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                            PluginResult.Status.ERROR, CANCEL_BY_USER),
-                    currentCallbackContext.getCallbackId());
+                    PluginResult.Status.ERROR, CANCEL_BY_USER),
+                currentCallbackContext.getCallbackId());
         }
 
         @Override
-        public void onWeiboException(WeiboException e) {
+        public void onFailure(WbConnectErrorMessage errorMessage) {
             WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
-                            PluginResult.Status.ERROR, WEIBO_EXCEPTION),
-                    currentCallbackContext.getCallbackId());
+                    PluginResult.Status.ERROR, WEIBO_EXCEPTION),
+                currentCallbackContext.getCallbackId());
         }
-    };
+    }
 }

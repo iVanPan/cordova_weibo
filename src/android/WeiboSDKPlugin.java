@@ -1,11 +1,9 @@
 package me.vanpan.weibosdk;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.sina.weibo.sdk.WbSdk;
@@ -191,7 +189,7 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
             textObject.text = description + " " + url;
             textObject.title = title;
             weiboMessage.textObject = textObject;
-            shareHandler.shareMessage(weiboMessage, true);
+            shareHandler.shareMessage(weiboMessage, false);
         } catch (JSONException e) {
             WeiboSDKPlugin.this.webView.sendPluginResult(new PluginResult(
                     PluginResult.Status.ERROR, PARAM_ERROR),

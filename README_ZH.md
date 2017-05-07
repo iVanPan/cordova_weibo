@@ -77,7 +77,7 @@ WeiboSDK.checkClientInstalled(function () {
 
 ### 获取用户信息
 ```Javascript
-var url = "https://api.weibo.com/2/users/show.json?uid=" + usrid + "&&access_token=" + token;
+var url = 'https://api.weibo.com/2/users/show.json?uid=' + usrid + '&&access_token=' + token;
 http.get(url)
 ```
 

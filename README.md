@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/dm/cordova-plugin-weibosdk.svg)](https://www.npmjs.com/package/cordova-plugin-weibosdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
 
 A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboSharing etc... [简体中文](https://github.com/iVanPan/cordova_weibo/blob/master/README_ZH.md)  
 
@@ -76,7 +75,7 @@ WeiboSDK.checkClientInstalled(function () {
 ```
 ### GetUserInfo
 ```Javascript
-var url = "https://api.weibo.com/2/users/show.json?uid=" + usrid + "&&access_token=" + token;
+var url = 'https://api.weibo.com/2/users/show.json?uid=' + usrid + '&&access_token=' + token;
 http.get(url)
 ```
 

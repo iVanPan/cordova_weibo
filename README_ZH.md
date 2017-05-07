@@ -3,7 +3,6 @@
 [![npm](https://img.shields.io/npm/dm/cordova-plugin-weibosdk.svg)](https://www.npmjs.com/package/cordova-plugin-weibosdk)
 [![platform](https://img.shields.io/badge/platform-iOS%2FAndroid-lightgrey.svg?style=flat)](https://github.com/iVanPan/cordova_weibo)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat)](https://github.com/iVanPan/cordova_weibo/blob/master/LICENSE)
-[![Contact](https://img.shields.io/badge/contact-Van-green.svg?style=flat)](http://VanPan.me)
 
 
 这是一个微博的 Cordova 插件. [English](https://github.com/iVanPan/cordova_weibo)    

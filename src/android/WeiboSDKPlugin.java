@@ -316,6 +316,10 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
     @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        if (shareHandler == null) {
+            shareHandler = new WbShareHandler(WeiboSDKPlugin.this.cordova.getActivity());
+            shareHandler.registerApp();
+        }
         WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
     }
 

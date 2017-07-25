@@ -302,7 +302,9 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
     }
 
     @Override public void onWbShareSuccess() {
-        WeiboSDKPlugin.currentCallbackContext.success();
+        if(WeiboSDKPlugin.currentCallbackContext != null) {
+            WeiboSDKPlugin.currentCallbackContext.success();
+        }
     }
 
     @Override public void onWbShareCancel() {

@@ -97,7 +97,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
     // NSString *title = [self check:@"title" in:params];
     NSString *description = [self check:@"description" in:params];
     NSString *url = [self check:@"url" in:params];
-    message.text = [description stringByAppendingString: url]
+    message.text = [description stringByAppendingString: url];
 
     NSString *image = [self check:@"image" in:params];
     NSData *imageData = [self processImage:image];

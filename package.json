@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-weibosdk",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "codrova/phonegap wrapper for weibo sdk",
   "main": "index.js",
   "scripts": {

@@ -6,5 +6,5 @@ repositories{
 }
 
 dependencies {
-    compile(name: 'openDefault-2.0.3', ext: 'aar')
+    compile(name: 'openDefault-2.0.6', ext: 'aar')
 }

@@ -92,15 +92,17 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
     authRequest.scope = @"all";
     NSDictionary *params = [command.arguments objectAtIndex:0];
     WBMessageObject *message = [WBMessageObject message];
-    WBWebpageObject *webpage = [WBWebpageObject object];
-    webpage.objectID = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-    webpage.title = [self check:@"title" in:params];
-    webpage.description = [NSString stringWithFormat:[self check:@"description" in:params], [[NSDate date] timeIntervalSince1970]];
-    webpage.webpageUrl = [self check:@"url" in:params];
+    WBImageObject *webpage = [WBImageObject object];
+
+    // NSString *title = [self check:@"title" in:params];
+    NSString *description = [self check:@"description" in:params];
+    NSString *url = [self check:@"url" in:params];
+    message.text = [description stringByAppendingString url
+
     NSString *image = [self check:@"image" in:params];
     NSData *imageData = [self processImage:image];
-    webpage.thumbnailData = imageData;
-    message.mediaObject = webpage;
+    webpage.imageData = imageData;
+    message.imageObject = webpage;
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [saveDefaults objectForKey:@"access_token"];
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:token];
@@ -216,7 +218,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
 }
 /**
  图片处理
- 
+
  @param image 图片数据
  @return 图片NSdata数据
  */
@@ -233,7 +235,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
 
 /**
  检查图片是不是Base64
- 
+
  @param data 图片数据
  @return 结果true or false
  */
@@ -253,7 +255,7 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
 
 /**
  检查参数是否存在
- 
+
  @param param 要检查的参数
  @param args 参数字典
  @return 参数

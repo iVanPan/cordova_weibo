@@ -15,4 +15,6 @@
 
 - (void)checkClientInstalled:(CDVInvokedUrlCommand *)command;
 
+- (void)shareImageToWeibo:(CDVInvokedUrlCommand *)command;
+
 @end

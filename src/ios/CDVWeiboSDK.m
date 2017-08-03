@@ -118,16 +118,11 @@ NSString *WEIBO_USER_CANCEL_INSTALL = @"user cancel install weibo";
     authRequest.scope = @"all";
     NSDictionary *params = [command.arguments objectAtIndex:0];
     WBMessageObject *message = [WBMessageObject message];
-    WBImageObject *webpage = [WBImageObject object];
-
-    NSString *description = [self check:@"description" in:params];
-    NSString *url = [self check:@"url" in:params];
-    message.text = [description stringByAppendingString: url];
-
+    WBImageObject *image = [WBImageObject object];
     NSString *image = [self check:@"image" in:params];
     NSData *imageData = [self processImage:image];
-    webpage.imageData = imageData;
-    message.imageObject = webpage;
+    image.imageData = imageData;
+    message.imageObject = image;
     NSUserDefaults *saveDefaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [saveDefaults objectForKey:@"access_token"];
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:token];

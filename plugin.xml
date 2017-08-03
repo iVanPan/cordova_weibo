@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.5.9">
+  version="0.6.0">
 
   <name>WeiboSDK</name>
   <description>A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboShating etc</description>

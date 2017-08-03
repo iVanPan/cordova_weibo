@@ -11,7 +11,7 @@
 ## 功能
 - 微博 SSO 登录
 - 微博登出
-- 微博分享
+- 微博分享(网页、文字、图片)
 - 检查微博官方客户端是否安装
 
 ## 安装要求
@@ -51,7 +51,7 @@ WeiboSDK.logout(function () {
 });
 ```
 
-### 微博分享
+### 微博网页分享
 ```Javascript
 var args = {};
 args.url = 'https://cordova.apache.org/';
@@ -59,6 +59,28 @@ args.title = 'Apache Cordova';
 args.description = 'This is a Cordova Plugin';
 args.image = 'https://cordova.apache.org/static/img/pluggy.png';
 WeiboSDK.shareToWeibo(function () {
+   alert('share success');
+}, function (failReason) {
+   alert(failReason);
+}, args);
+```
+
+### 微博图片分享
+```Javascript
+var args = {};
+args.image = 'https://cordova.apache.org/static/img/pluggy.png';
+WeiboSDK.shareImageToWeibo(function () {
+   alert('share success');
+}, function (failReason) {
+   alert(failReason);
+}, args);
+```
+
+### 微博文字分享
+```Javascript
+var args = {};
+args.text = 'This is a Cordova Plugin';
+WeiboSDK.shareTextToWeibo(function () {
    alert('share success');
 }, function (failReason) {
    alert(failReason);

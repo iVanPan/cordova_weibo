@@ -10,7 +10,7 @@ A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access 
 ## Feature
 - Weibo SSO Login
 - Weibo Logout
-- Weibo Share
+- Weibo Share (WebPage,Text,Image)
 - Check Weibo Client is Installed
 
 ## Requirements
@@ -52,7 +52,7 @@ WeiboSDK.logout(function () {
 });
 ```
 
-### Weibo Share
+### Weibo WebPage Share
 ```Javascript
 var args = {};
 args.url = 'https://cordova.apache.org/';
@@ -60,6 +60,26 @@ args.title = 'Apache Cordova';
 args.description = 'This is a Cordova Plugin';
 args.image = 'https://cordova.apache.org/static/img/pluggy.png';
 WeiboSDK.shareToWeibo(function () {
+   alert('share success');
+}, function (failReason) {
+   alert(failReason);
+}, args);
+```
+### Weibo Image Share
+```Javascript
+var args = {};
+args.image = 'https://cordova.apache.org/static/img/pluggy.png';
+WeiboSDK.shareImageToWeibo(function () {
+   alert('share success');
+}, function (failReason) {
+   alert(failReason);
+}, args);
+```
+### Weibo Text Share
+```Javascript
+var args = {};
+args.text = 'This is a Cordova Plugin';
+WeiboSDK.shareTextToWeibo(function () {
    alert('share success');
 }, function (failReason) {
    alert(failReason);

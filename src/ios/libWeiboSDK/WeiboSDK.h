@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "WBHttpRequest.h"
-#import "WBHttpRequest+WeiboToken.h"
+
 
 typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
 {
@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
     WeiboSDKResponseStatusCodeUnknown               = -100,
 };
 
+
 @protocol WeiboSDKDelegate;
 @protocol WBHttpRequestDelegate;
 @class WBBaseRequest;
@@ -33,6 +34,8 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
 @class WBImageObject;
 @class WBBaseMediaObject;
 @class WBHttpRequest;
+@class PHAsset;
+@class WBNewVideoObject;
 
 /**
  微博SDK接口类
@@ -62,6 +65,7 @@ typedef NS_ENUM(NSInteger, WeiboSDKResponseStatusCode)
  @return 成功打开返回YES，失败返回NO
  */
 + (BOOL)openWeiboApp;
+
 
 
 /**
@@ -328,6 +332,7 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  */
 @property (nonatomic, assign) BOOL shouldShowWebViewForAuthIfCannotSSO;
 
+
 @end
 
 
@@ -444,7 +449,7 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 /**
  微博客户端程序和第三方应用之间传递的消息结构
  
- 一个消息结构由三部分组成：文字、图片和多媒体数据。三部分内容中至少有一项不为空，图片和多媒体数据不能共存。
+ 一个消息结构由三部分组成：文字、图片和多媒体数据。三部分内容中至少有一项不为空，图片和多媒体数据不能共存。(新版的多图和视频属于图片数据，并且图片和视频也不能共存)
  */
 @interface WBMessageObject : NSObject
 
@@ -470,11 +475,45 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 @property (nonatomic, strong) WBBaseMediaObject *mediaObject;
 
 /**
+ 消息的视频内容
+ 
+ @see WBVideoObject
+ */
+@property (nonatomic, strong) WBNewVideoObject *videoObject;
+/**
  返回一个 WBMessageObject 对象
  
  @return 返回一个*自动释放的*WBMessageObject对象
  */
 + (id)message;
+
+@end
+
+/**
+ 图片视频分享时错误枚举
+ */
+
+typedef NS_ENUM(NSInteger, WBSDKMediaTransferErrorCode)
+{
+    WBSDKMediaTransferAlbumPermissionError              = 0,//相册权限
+    WBSDKMediaTransferAlbumWriteError               = 0,//相册写入错误
+    WBSDKMediaTransferAlbumAssetTypeError               = 0,//资源类型错误
+};
+
+/**
+ 图片视频分享协议
+ */
+@protocol WBMediaTransferProtocol <NSObject>
+
+/**
+ 数据准备成功回调
+ */
+-(void)wbsdk_TransferDidReceiveObject:(id)object;
+
+/**
+ 数据准备失败回调
+ */
+-(void)wbsdk_TransferDidFailWithErrorCode:(WBSDKMediaTransferErrorCode)errorCode andError:(NSError*)error;
 
 @end
 
@@ -491,6 +530,11 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 @property (nonatomic, strong) NSData *imageData;
 
 /**
+ 是否分享到story
+ */
+@property (nonatomic) BOOL isShareToStory;
+
+/**
  返回一个 WBImageObject 对象
  
  @return 返回一个*自动释放的*WBImageObject对象
@@ -504,7 +548,65 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  */
 - (UIImage *)image;
 
+
+/**
+ 多图分享委托
+ */
+@property(nonatomic,weak)id<WBMediaTransferProtocol> delegate;
+
+/**
+ 图片对象添加图片数组
+ */
+- (void)addImages:(NSArray<UIImage *>*)imageArray;
+
+/**
+ 图片对象添加照片数组
+ */
+- (void)addImageAssets:(NSArray<PHAsset*>*)assetArray;
+
+/**
+ 多图最终传递对象
+ */
+-(NSArray*)finalAssetArray;
+
 @end
+
+@interface WBNewVideoObject : NSObject
+
+/**
+ 返回一个 WBNewVideoObject 对象
+ 
+ @return 返回一个*自动释放的*WBNewVideoObject对象
+ */
++ (id)object;
+
+/**
+ 是否分享到story
+ */
+@property (nonatomic) BOOL isShareToStory;
+
+/**
+ 多图分享委托
+ */
+@property(nonatomic,weak)id<WBMediaTransferProtocol> delegate;
+
+/**
+ 视频对象添加视频
+ */
+-(void)addVideo:(NSURL*)videoUrl;
+
+/**
+ 视频对象添加视频资源
+ */
+-(void)addVideoAsset:(PHAsset*)videoAsset;
+
+/**
+ 视频最终传递对象
+ */
+-(NSString*)finalAsset;
+
+@end
+
 
 #pragma mark - Message Media Objects
 

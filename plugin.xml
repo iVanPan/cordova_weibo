@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.6.0">
+  version="0.6.1">
 
   <name>WeiboSDK</name>
   <description>A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboShating etc</description>
@@ -64,16 +64,15 @@
   </config-file>
   <header-file src="src/ios/CDVWeiboSDK.h"/>
   <source-file src="src/ios/CDVWeiboSDK.m"/>
-  <!-- Weibo sdk version 3.2.0 https://github.com/sinaweibosdk/weibo_ios_sdk -->
+  <!-- Weibo sdk version 3.2.2 https://github.com/sinaweibosdk/weibo_ios_sdk -->
   <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
-  <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboToken.h" />
   <header-file src="src/ios/libWeiboSDK/WeiboSDK.h" />
-  <header-file src="src/ios/libWeiboSDK/WeiboSDK+Statistics.h" />
   <source-file src="src/ios/libWeiboSDK/libWeiboSDK.a" framework="true"  compiler-flags="-objc"/>
   <resource-file src="src/ios/libWeiboSDK/WeiboSDK.bundle" />
 
   <!--required frameworks for weibo sdk-->
   <framework src="QuartzCore.framework" />
+  <framework src="Photos.framework" />
   <framework src="ImageIO.framework" />
   <framework src="SystemConfiguration.framework" />
   <framework src="Security.framework" />
@@ -112,7 +111,7 @@
   </config-file>
 
   <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
-  <!-- android weibo sdk version 4.0.0(2.0.6)  https://github.com/sinaweibosdk/weibo_android_sdk-->
+  <!-- android weibo sdk version 4.1.5  https://github.com/sinaweibosdk/weibo_android_sdk-->
   <source-file src="src/android/libs/so/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/"/>
   <source-file src="src/android/libs/so/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/"/>
   <source-file src="src/android/libs/so/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/"/>

@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.6.1">
+  version="0.6.3">
 
   <name>WeiboSDK</name>
   <description>A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboShating etc</description>
@@ -15,7 +15,7 @@
   <!--require cordova version -->
   <engines>
     <engine name="cordova" version=">=3.5.0" />
-    <engine name="cordova-android" version=">=4.0.0" />
+    <engine name="cordova-android" version=">=7.0.0" />
     <engine name="cordova-ios" version=">=4.0.0" />
   </engines>
 
@@ -102,7 +102,7 @@
     <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
   </config-file>
   <!-- android  uses-permission for weibo sdk-->
-  <config-file target="AndroidManifest.xml" parent="/manifest">
+  <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -112,14 +112,14 @@
 
   <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
   <!-- android weibo sdk version 4.1.5  https://github.com/sinaweibosdk/weibo_android_sdk-->
-  <source-file src="src/android/libs/so/arm64-v8a/libweibosdkcore.so" target-dir="libs/arm64-v8a/"/>
-  <source-file src="src/android/libs/so/armeabi/libweibosdkcore.so" target-dir="libs/armeabi/"/>
-  <source-file src="src/android/libs/so/armeabi-v7a/libweibosdkcore.so" target-dir="libs/armeabi-v7a/"/>
-  <source-file src="src/android/libs/so/mips/libweibosdkcore.so" target-dir="libs/mips/"/>
-  <source-file src="src/android/libs/so/mips64/libweibosdkcore.so" target-dir="libs/mips64/"/>
-  <source-file src="src/android/libs/so/x86/libweibosdkcore.so" target-dir="libs/x86/"/>
-  <source-file src="src/android/libs/so/x86_64/libweibosdkcore.so" target-dir="libs/x86_64/"/>
-  <source-file src="src/android/libs/openDefault-4.1.5.aar" target-dir="libs/" />
+  <source-file src="src/android/libs/so/arm64-v8a/libweibosdkcore.so" target-dir="app/libs/arm64-v8a/"/>
+  <source-file src="src/android/libs/so/armeabi/libweibosdkcore.so" target-dir="app/libs/armeabi/"/>
+  <source-file src="src/android/libs/so/armeabi-v7a/libweibosdkcore.so" target-dir="app/libs/armeabi-v7a/"/>
+  <source-file src="src/android/libs/so/mips/libweibosdkcore.so" target-dir="app/libs/mips/"/>
+  <source-file src="src/android/libs/so/mips64/libweibosdkcore.so" target-dir="app/libs/mips64/"/>
+  <source-file src="src/android/libs/so/x86/libweibosdkcore.so" target-dir="app/libs/x86/"/>
+  <source-file src="src/android/libs/so/x86_64/libweibosdkcore.so" target-dir="app/libs/x86_64/"/>
+  <source-file src="src/android/libs/openDefault-4.1.5.aar" target-dir="app/libs/" />
   <framework src="src/android/libs/WeiboSDKPlugin.gradle" custom="true" type="gradleReference" />
 </platform>
 </plugin>

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-weibosdk",
-  "version": "0.6.1",
+  "version": "0.6.3",
   "description": "codrova/phonegap wrapper for weibo sdk",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,12 @@
     "sina",
     "login",
     "share"
+  ],
+    "engines": [
+    {
+      "name": "cordova-android",
+      "version": ">=7.0.0"
+    }
   ],
   "author": "https://github.com/iVanPan",
   "license": "MIT",

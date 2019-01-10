@@ -203,8 +203,10 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if (mSsoHandler != null) {
+        if (mSsoHandler != null && requestCode == 32973) {
             mSsoHandler.authorizeCallBack(requestCode, resultCode, intent);
+        } else if(requestCode == 1) {
+            WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
         }
     }
 
@@ -411,11 +413,11 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
         WeiboSDKPlugin.currentCallbackContext.error(SHARE_FAIL);
     }
 
-    @Override
-    public void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
-    }
+    // @Override
+    // public void onNewIntent(Intent intent) {
+    //     super.onNewIntent(intent);
+    //     WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
+    // }
 
     private class SelfWbAuthListener implements com.sina.weibo.sdk.auth.WbAuthListener{
         @Override

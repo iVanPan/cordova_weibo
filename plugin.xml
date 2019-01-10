@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
   xmlns:android="http://schemas.android.com/apk/res/android"
   id="cordova-plugin-weibosdk"
-  version="0.6.3">
+  version="0.6.4">
 
   <name>WeiboSDK</name>
   <description>A Cordova wrapper around the Sina WeiboSDK for Android and iOS. Provides access to ssoLogin, WeiboShating etc</description>
@@ -99,7 +99,8 @@
     <access origin="https://passport.weibo.cn/*"/>
     <access origin="http://*.sinaimg.cn/*"/>
     <access origin="https://api.weibo.com/*"/>
-    <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
+    <!-- Adds "a" as a prefix to avoid large integer being parsed as numbers and represented as floats -->
+    <preference name="WEIBO_APP_ID" value="a$WEIBO_APP_ID"/>
   </config-file>
   <!-- android  uses-permission for weibo sdk-->
   <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest">
@@ -111,7 +112,7 @@
   </config-file>
 
   <source-file src="src/android/WeiboSDKPlugin.java" target-dir="src/me/vanpan/weibosdk" />
-  <!-- android weibo sdk version 4.1.5  https://github.com/sinaweibosdk/weibo_android_sdk-->
+  <!-- android weibo sdk version 4.3.6  https://github.com/sinaweibosdk/weibo_android_sdk-->
   <source-file src="src/android/libs/so/arm64-v8a/libweibosdkcore.so" target-dir="app/libs/arm64-v8a/"/>
   <source-file src="src/android/libs/so/armeabi/libweibosdkcore.so" target-dir="app/libs/armeabi/"/>
   <source-file src="src/android/libs/so/armeabi-v7a/libweibosdkcore.so" target-dir="app/libs/armeabi-v7a/"/>
@@ -119,7 +120,7 @@
   <source-file src="src/android/libs/so/mips64/libweibosdkcore.so" target-dir="app/libs/mips64/"/>
   <source-file src="src/android/libs/so/x86/libweibosdkcore.so" target-dir="app/libs/x86/"/>
   <source-file src="src/android/libs/so/x86_64/libweibosdkcore.so" target-dir="app/libs/x86_64/"/>
-  <source-file src="src/android/libs/openDefault-4.1.5.aar" target-dir="app/libs/" />
+  <source-file src="src/android/libs/openDefault-4.3.6.aar" target-dir="app/libs/" />
   <framework src="src/android/libs/WeiboSDKPlugin.gradle" custom="true" type="gradleReference" />
 </platform>
 </plugin>

@@ -99,8 +99,7 @@
     <access origin="https://passport.weibo.cn/*"/>
     <access origin="http://*.sinaimg.cn/*"/>
     <access origin="https://api.weibo.com/*"/>
-    <!-- Adds "a" as a prefix to avoid large integer being parsed as numbers and represented as floats -->
-    <preference name="WEIBO_APP_ID" value="a$WEIBO_APP_ID"/>
+    <preference name="WEIBO_APP_ID" value="$WEIBO_APP_ID"/>
   </config-file>
   <!-- android  uses-permission for weibo sdk-->
   <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest">

@@ -55,8 +55,7 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
     @Override
     protected void pluginInitialize() {
         super.pluginInitialize();
-        // The first letter "a" was added in plugin.xml to avoid the string be parsed as a number, remove it here.
-        APP_KEY = webView.getPreferences().getString(WEBIO_APP_ID, "a").substring(1);
+        APP_KEY = webView.getPreferences().getString(WEBIO_APP_ID, "");
         REDIRECT_URL = webView.getPreferences().getString(WEBIO_REDIRECT_URL, DEFAULT_URL);
         WbSdk.install(WeiboSDKPlugin.this.cordova.getActivity(),new AuthInfo(WeiboSDKPlugin.this.cordova.getActivity(), APP_KEY, REDIRECT_URL, SCOPE));
     }

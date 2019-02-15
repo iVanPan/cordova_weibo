@@ -415,7 +415,9 @@ public class WeiboSDKPlugin extends CordovaPlugin implements WbShareCallback {
     @Override
     public void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
+        if (WeiboSDKPlugin.shareHandler != null) {
+          WeiboSDKPlugin.shareHandler.doResultIntent(intent,this);
+        }
     }
 
     private class SelfWbAuthListener implements com.sina.weibo.sdk.auth.WbAuthListener{
